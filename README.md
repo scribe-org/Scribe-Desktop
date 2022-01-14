@@ -9,7 +9,7 @@
 [![coc](https://img.shields.io/badge/coc-Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
 -->
 
-### Language learning keyboard interface
+### Language learning keyboard interface for Windows, Mac, and Linux
 
 This repository would contain the desktop version of Scribe. Developers interested in helping to create a version of [Scribe-iOS](https://github.com/scribe-org/Scribe-iOS) for desktop are invited to discuss the project in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues).
 
