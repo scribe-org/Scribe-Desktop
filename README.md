@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://github.com/scribe-org/Scribe-Desktop/blob/main/Resources/Scribe-Desktop_logo_transparent.png" width=822 height=164 alt="Scribe-Desktop Logo"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/Scribe-Desktop_logo_transparent.png" width=822 height=164 alt="Scribe-Desktop Logo"></a>
 </div>
 
 ---
