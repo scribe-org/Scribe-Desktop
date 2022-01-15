@@ -29,8 +29,8 @@ Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-De
 
   - Noun and preposition annotation for any language that is currently in Scribe-iOS
 
-  - Commands for querying the conjugations of verbs and plurals of nouns
-
-  - The ability for commands to be clicked or mapped to shortcuts
+  - Commands for querying the conjugations of verbs, plurals of nouns and translations
 
   - Accessing translations of words from a common directory in [scribe-org](https://github.com/scribe-org)
+
+  - The ability for commands to be clicked or mapped to shortcuts
