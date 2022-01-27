@@ -4,10 +4,10 @@
 
 ---
 
-<!--
+[![platforms](https://img.shields.io/badge/platforms-Windows%20│%20macOS%20│%20Linux-999999.svg)](https://github.com/scribe-org/Scribe-Desktop)
+[![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop)](https://github.com/scribe-org/Scribe-Desktop/issues)
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
 [![coc](https://img.shields.io/badge/coc-Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
--->
 
 ### Language learning keyboard interface for Windows, Mac and Linux
 
