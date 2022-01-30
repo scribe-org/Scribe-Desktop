@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/Scribe-Desktop_logo_transparent.png" width=822 height=164 alt="Scribe-Desktop Logo"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/logo/ScribeAppLogo.png" width=512 height=230 alt="Scribe Logo"></a>
 </div>
 
 ---
@@ -8,6 +8,8 @@
 [![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop)](https://github.com/scribe-org/Scribe-Desktop/issues)
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
 [![coc](https://img.shields.io/badge/coc-Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
+
+<!-- Also available on [Android](https://github.com/scribe-org/Scribe-Android) and [iOS](https://github.com/scribe-org/Scribe-iOS). -->
 
 ### Language learning keyboard interface for Windows, Mac and Linux
 
