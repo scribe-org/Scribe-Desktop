@@ -6,6 +6,7 @@
 
 [![platforms](https://img.shields.io/badge/platforms-Windows%20│%20macOS%20│%20Linux-999999.svg)](https://github.com/scribe-org/Scribe-Desktop)
 [![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop)](https://github.com/scribe-org/Scribe-Desktop/issues)
+[![discussions](https://img.shields.io/github/discussions/scribe-org/Scribe-Desktop)](https://github.com/scribe-org/Scribe-Desktop/discussions)
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
 [![coc](https://img.shields.io/badge/coc-Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
 
@@ -25,8 +26,7 @@ Thanks for your interest in contributing!
 
 Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md) if you are interested in contributing to this project. Work that is in progress or could be implemented includes:
 
-- Planning development of Scribe-Desktop in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues)
-
+- Planning development of Scribe-Desktop in the [Issues](https://github.com/scribe-org/Scribe-Desktop/issues) and [Discussions](https://github.com/scribe-org/Scribe-Desktop/discussions)
 - Creating an MVP that would include:
 
   - Noun and preposition annotation for any language that is currently in Scribe-iOS
