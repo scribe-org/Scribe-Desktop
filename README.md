@@ -45,7 +45,7 @@ The following is a mockup of the planned interface:
 
 <div align="center">
   <br>
-  <a href="https://github.com/scribe-org/Scribe-Desktop/Resources/gh_images/scribe_desktop_example.png"><img height="250" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/gh_images/scribe_desktop_example.png" alt="Scribe-Desktop Preview"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop/Resources/gh_images/scribe_desktop_example.png"><img height="350" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/gh_images/scribe_desktop_example.png" alt="Scribe-Desktop Preview"></a>
   <br>
 </div>
 
@@ -81,7 +81,7 @@ Keyboard features are accessed via keyboard shortcuts or the `Scribe button` wit
 
 ### • Translation [`⇧`](#contents) <a id="translation"></a>
 
-The **`beta`** `Translate` feature can translate single words or phrases from English into the language of the current keyboard when the `return` or `Enter` key is pressed.
+The **`beta`** `Translate` feature can translate single words or phrases from English into the language of the current keyboard when the `return` or `Enter` keys are pressed.
 
 As of now translations are not widely available on [Wikidata](https://www.wikidata.org/) [(see iOS issue)](https://github.com/scribe-org/Scribe-iOS/issues/40). The current functionality is thus based on [🤗 Transformers](https://github.com/huggingface/transformers) machine translations of words queried from [Wikidata](https://www.wikidata.org/). The ultimate goal is for the translations and synonyms to all be directly queried.
 
@@ -91,7 +91,7 @@ With the `Conjugate` feature, a user is presented with the grammar charts for an
 
 ### • Noun Plurals [`⇧`](#contents) <a id="noun-plurals"></a>
 
-The `Plural` feature allows a user to enter a noun and then insert its plural into the text field when the `return` or `Enter` key is pressed.
+The `Plural` feature allows a user to enter a noun and then insert its plural into the text field when the `return` or `Enter` keys are pressed.
 
 ### • Word Annotation [`⇧`](#contents) <a id="word-annotation"></a>
 
