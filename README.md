@@ -45,7 +45,7 @@ The following is a mockup of the planned interface:
 
 <div align="center">
   <br>
-  <a href="https://github.com/scribe-org/Scribe-Desktop/Resources/gh_images/scribe_desktop_example.png"><img height="350" src="https://github.com/scribe-org/Scribe-Desktop/Resources/gh_images/scribe_desktop_example.png" alt="Scribe-Desktop Preview"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop/main/Resources/gh_images/scribe_desktop_example.png"><img height="350" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/gh_images/scribe_desktop_example.png" alt="Scribe-Desktop Preview"></a>
   <br>
 </div>
 
