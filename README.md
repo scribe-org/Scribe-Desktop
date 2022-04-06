@@ -11,9 +11,9 @@
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
 [![coc](https://img.shields.io/badge/coc-Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
 
-<!-- <a href='https://microsoft.com/store/apps/windows'><img alt='Get it from Microsoft' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/GitHub/Images/microsoft_store_badge.png' height='60px'/></a>
-<a href='https://apple.com/app-store/'><img alt='Available on the App Store' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/GitHub/Images/app_store_badge.png' height='60px'/></a>
-<a href='https://flathub.org/home'><img src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/Resources/GitHub/Images/flathub_badge.png' alt='Download on Flathub' height='60px' /></a> -->
+<!-- <a href='https://microsoft.com/store/apps/windows'><img alt='Get it from Microsoft' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/resources/gh_images/microsoft_store_badge.png' height='60px'/></a>
+<a href='https://apps.apple.com/app/scribe-language-keyboards/id1596613886'><img alt='Available on the App Store' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/resources/gh_images/app_store_badge.png' height='60px'/></a>
+<a href='https://flathub.org/home'><img src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/resources/gh_images/flathub_badge.png' alt='Download on Flathub' height='60px' /></a> -->
 
 Also available on [iOS](https://github.com/scribe-org/Scribe-iOS) and [Android](https://github.com/scribe-org/Scribe-Android) (WIP).
 
