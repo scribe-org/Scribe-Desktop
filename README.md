@@ -55,7 +55,7 @@ The following is a mockup of the planned interface:
 
 # Supported Languages [`⇧`](#contents) <a id="supported-languages"></a>
 
-Scribe's goal is functional, feature-rich language interfaces for all languages. Check [Scribe-Data/data](https://github.com/scribe-org/Scribe-Data/tree/main/data) for queries for currently supported languages and those that have substantial data on [Wikidata](https://www.wikidata.org/).
+Scribe's goal is functional, feature-rich language interfaces for all languages. Check [scribe_data/extract_transform](https://github.com/scribe-org/Scribe-Data/tree/main/src/scribe_data/extract_transform) for queries for currently supported languages and those that have substantial data on [Wikidata](https://www.wikidata.org/).
 
 The following table shows the supported languages and the amount of data available for each on [Wikidata](https://www.wikidata.org/):
 
