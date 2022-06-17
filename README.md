@@ -25,7 +25,7 @@ Also available on [iOS](https://github.com/scribe-org/Scribe-iOS) and [Android](
 
 Scribe is fully open-source and does not collect usage data or ask for system access. Feature data is sourced from [Wikidata](https://www.wikidata.org/) and stored in-app, meaning Scribe is a highly responsive experience that does not require an internet connection.
 
-The [Contributing](#contributing) section has information for those interested, with the articles and presentations in [Featured In](#featured-in) also being a good resource for learning more about Scribe. Those interested in contributing are also welcome to join us in the [discussions](https://github.com/scribe-org/Scribe-Desktop/discussions)!
+The [contributing](#contributing) section has information for those interested, with the articles and presentations in [featured by](#featured-by) also being a good resource for learning more about Scribe. Those interested in contributing are also welcome to join us in the [discussions](https://github.com/scribe-org/Scribe-Desktop/discussions)!
 
 # **Contents**<a id="contents"></a>
 
@@ -124,7 +124,7 @@ A future feature of Scribe is language practice within the app itself. Scribe pr
 
 # Contributing [`⇧`](#contents) <a id="contributing"></a>
 
-Work that is in progress or could be implemented is tracked in the [Issues](https://github.com/scribe-org/Scribe-Desktop/issues). Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md) if you are interested in contributing to Scribe-Desktop. Also check the [`-next release-`](https://github.com/scribe-org/Scribe-Desktop/labels/-next%20release-) and [`-priority-`](https://github.com/scribe-org/Scribe-Desktop/labels/-priority-) labels in the [Issues](https://github.com/scribe-org/Scribe-Desktop/issues) for those that are most important, as well as those marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are tailored for first time contributors.
+Work that is in progress or could be implemented is tracked in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues). Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md) if you are interested in contributing to Scribe-Desktop. Also check the [`-next release-`](https://github.com/scribe-org/Scribe-Desktop/labels/-next%20release-) and [`-priority-`](https://github.com/scribe-org/Scribe-Desktop/labels/-priority-) labels in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues) for those that are most important, as well as those marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are tailored for first time contributors.
 
 ### Ways to Help
 
