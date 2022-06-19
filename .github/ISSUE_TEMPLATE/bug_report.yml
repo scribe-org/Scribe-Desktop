@@ -18,21 +18,18 @@ body:
         A concise description of what you're experiencing and what you expected to happen.
     validations:
       required: true
-  - type: dropdown
+  - type: input
     id: device
     attributes:
       label: Device type
-      options:
-        - iPhone
-        - iPad
-        - iPhone and iPad
+      placeholder: "Please enter the device type"
     validations:
       required: true
   - type: input
     id: version
     attributes:
-      label: iOS version
-      placeholder: "iOS/iPadOS vX.Y.Z"
+      label: Versions
+      placeholder: "What are the OS and Scribe versions?"
     validations:
       required: false
   - type: markdown
