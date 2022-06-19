@@ -19,7 +19,7 @@ Also available on [iOS](https://github.com/scribe-org/Scribe-iOS) and [Android](
 
 # Planned port of [Scribe-iOS](https://github.com/scribe-org/Scribe-iOS): see [Issues](https://github.com/scribe-org/Scribe-Desktop/issues)
 
-### Language learning interface for Windows, Mac and Linux
+### Second language interface for Windows, Mac and Linux
 
 **Scribe-Desktop** is a language learning interface for Windows, Mac and Linux operating systems. The Scribe GUI provides needed information as the user types and serves as a field for input commands. Features include translation **`(beta)`**, verb conjugation and word annotation that give users the tools needed to communicate with confidence.
 
