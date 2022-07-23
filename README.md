@@ -15,8 +15,6 @@
 <a href='https://apps.apple.com/app/scribe-language-keyboards/id1596613886'><img alt='Available on the App Store' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/app_store_badge.png' height='60px'/></a>
 <a href='https://flathub.org/home'><img src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/flathub_badge.png' alt='Download on Flathub' height='60px' /></a> -->
 
-Also available on [iOS](https://github.com/scribe-org/Scribe-iOS) and [Android](https://github.com/scribe-org/Scribe-Android) (WIP).
-
 # Planned port of [Scribe-iOS](https://github.com/scribe-org/Scribe-iOS): see [Issues](https://github.com/scribe-org/Scribe-Desktop/issues)
 
 ### Typing GUI for language learners on Windows, Mac and Linux
@@ -26,6 +24,8 @@ Also available on [iOS](https://github.com/scribe-org/Scribe-iOS) and [Android](
 Scribe is fully open-source and does not collect usage data or ask for system access. Feature data is sourced from [Wikidata](https://www.wikidata.org/) and stored in-app, meaning Scribe is a highly responsive experience that does not require an internet connection.
 
 The [contributing](#contributing) section has information for those interested, with the articles and presentations in [featured by](#featured-by) also being a good resource for learning more about Scribe.
+
+Also available on [iOS](https://github.com/scribe-org/Scribe-iOS) and [Android](https://github.com/scribe-org/Scribe-Android) (WIP).
 
 <a id="contents"></a>
 
