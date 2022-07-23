@@ -35,6 +35,7 @@ The [contributing](#contributing) section has information for those interested, 
   - [Base Functionality](#base-functionality) -->
 
 - [Preview](#preview)
+- [Contributing](#contributing)
 - [Supported Languages](#supported-languages)
 - [Keyboard Features](#keyboard-features)
   - [Translation](#translation)
@@ -42,7 +43,6 @@ The [contributing](#contributing) section has information for those interested, 
   - [Noun Plurals](#noun-plurals)
   - [Word Annotation](#word-annotation)
 - [Language Practice](#language-practice)
-- [Contributing](#contributing)
 - [Featured By](#featured-by)
 
 <a id="preview"></a>
@@ -56,6 +56,25 @@ The following is a mockup of the planned interface:
   <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_example.png"><img height="350" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_example.png" alt="Scribe-Desktop Preview"></a>
   <br>
 </div>
+
+<a id="contributing"></a>
+
+# Contributing [`⇧`](#contents)
+
+Work that is in progress or could be implemented is tracked in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues). Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md) if you are interested in contributing to Scribe-Desktop. Also check the [`-next release-`](https://github.com/scribe-org/Scribe-Desktop/labels/-next%20release-) and [`-priority-`](https://github.com/scribe-org/Scribe-Desktop/labels/-priority-) labels in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues) for those that are most important, as well as those marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are tailored for first time contributors.
+
+### Ways to Help
+
+- Join us in the [Discussions](https://github.com/scribe-org/Scribe-Desktop/discussions) 👋
+- [Reporting bugs](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=bug&template=bug_report.yml) as they're found 🐞
+- Working on [new features](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Afeature) ✨
+- [Localization](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Alocalization) for the options and stores 🌐
+- [Documentation](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation) for onboarding and project cohesion 📝
+- Adding language data to [Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) via [Wikidata](https://www.wikidata.org/)! 🗃️
+
+### Data Edits
+
+Scribe does not accept direct edits to the grammar JSON files as they are sourced from [Wikidata](https://www.wikidata.org/). Edits can be discussed and the queries themselves will be changed and ran before an update. If there is a problem with one of the files, then the fix should be made on [Wikidata](https://www.wikidata.org/) and not on Scribe. Feel free to let us know that edits have been made by [opening a data issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=data&template=data_wikidata.yml) or contacting us in the [issues for Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) and we'll be happy to integrate them!
 
 <a id="supported-languages"></a>
 
@@ -139,25 +158,6 @@ Scribe also annotates the grammatical cases (accusative, dative, etc) of preposi
 # Language Practice [`⇧`](#contents)
 
 A future feature of Scribe is language practice within the app itself. Scribe presents users with information that is directly relevant to their current struggles with a second language. This information can be saved in-app and used to create personalized lessons such as flashcards to reinforce the information that Scribe has provided.
-
-<a id="contributing"></a>
-
-# Contributing [`⇧`](#contents)
-
-Work that is in progress or could be implemented is tracked in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues). Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md) if you are interested in contributing to Scribe-Desktop. Also check the [`-next release-`](https://github.com/scribe-org/Scribe-Desktop/labels/-next%20release-) and [`-priority-`](https://github.com/scribe-org/Scribe-Desktop/labels/-priority-) labels in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues) for those that are most important, as well as those marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are tailored for first time contributors.
-
-### Ways to Help
-
-- Join us in the [Discussions](https://github.com/scribe-org/Scribe-Desktop/discussions) 👋
-- [Reporting bugs](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=bug&template=bug_report.yml) as they're found
-- Working on [new features](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Afeature)
-- [Localization](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Alocalization) for the app and Google Play
-- [Documentation](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation) for onboarding and project cohesion
-- Adding language data to [Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) via [Wikidata](https://www.wikidata.org/)!
-
-### Data Edits
-
-Scribe does not accept direct edits to the grammar JSON files as they are sourced from [Wikidata](https://www.wikidata.org/). Edits can be discussed and the queries themselves will be changed and ran before an update. If there is a problem with one of the files, then the fix should be made on [Wikidata](https://www.wikidata.org/) and not on Scribe. Feel free to let us know that edits have been made by [opening a data issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=data&template=data_wikidata.yml) or contacting us in the [issues for Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) and we'll be happy to integrate them!
 
 <a id="featured-by"></a>
 
