@@ -6,7 +6,6 @@
 
 [![platforms](https://img.shields.io/badge/platforms-Windows%20│%20macOS%20│%20Linux-999999.svg)](https://github.com/scribe-org/Scribe-Desktop)
 [![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop)](https://github.com/scribe-org/Scribe-Desktop/issues)
-[![discussions](https://img.shields.io/github/discussions/scribe-org/Scribe-Desktop)](https://github.com/scribe-org/Scribe-Desktop/discussions)
 [![language](https://img.shields.io/badge/Python-3-306998.svg?logo=python&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
 [![coc](https://img.shields.io/badge/coc-Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
@@ -65,7 +64,6 @@ Work that is in progress or could be implemented is tracked in the [issues](http
 
 ### Ways to Help
 
-- Join us in the [Discussions](https://github.com/scribe-org/Scribe-Desktop/discussions) 👋
 - [Reporting bugs](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=bug&template=bug_report.yml) as they're found 🐞
 - Working on [new features](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Afeature) ✨
 - [Localization](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Alocalization) for the options and stores 🌐
