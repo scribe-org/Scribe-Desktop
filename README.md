@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/logo/ScribeAppLogo.png" width=512 height=230 alt="Scribe Logo"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/logo/ScribeAppLogo.png" width=410 height=184 alt="Scribe Logo"></a>
 </div>
 
 <ol></ol>
@@ -35,13 +35,6 @@ Also available on [iOS](https://github.com/scribe-org/Scribe-iOS) and [Android](
 
 - [Preview](#preview)
 - [Contributing](#contributing)
-- [Supported Languages](#supported-languages)
-- [Keyboard Features](#keyboard-features)
-  - [Translation](#translation)
-  - [Verb Conjugation](#verb-conjugation)
-  - [Noun Plurals](#noun-plurals)
-  - [Word Annotation](#word-annotation)
-- [Language Practice](#language-practice)
 - [Featured By](#featured-by)
 
 <a id="preview"></a>
@@ -74,88 +67,11 @@ Work that is in progress or could be implemented is tracked in the [issues](http
 
 Scribe does not accept direct edits to the grammar JSON files as they are sourced from [Wikidata](https://www.wikidata.org/). Edits can be discussed and the queries themselves will be changed and ran before an update. If there is a problem with one of the files, then the fix should be made on [Wikidata](https://www.wikidata.org/) and not on Scribe. Feel free to let us know that edits have been made by [opening a data issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=data&template=data_wikidata.yml) or contacting us in the [issues for Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) and we'll be happy to integrate them!
 
-<a id="supported-languages"></a>
+### Designs
 
-# Supported Languages [`⇧`](#contents)
+<a href="https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/figma_logo.png" height="50" alt="Public Figma Designs" align="right"></a>
 
-Scribe's goal is functional, feature-rich language interfaces for all languages. Check [scribe_data/extract_transform](https://github.com/scribe-org/Scribe-Data/tree/main/src/scribe_data/extract_transform) for queries for currently supported languages and those that have substantial data on [Wikidata](https://www.wikidata.org/).
-
-The following table shows the supported languages and the amount of data available for each on [Wikidata](https://www.wikidata.org/):
-
-| Languages  |   Nouns | Verbs | Translations\* | Adjectives† | Prepositions‡ |
-| :--------- | ------: | ----: | -------------: | ----------: | ------------: |
-| French     |  16,374 | 1,506 |         67,652 |           - |             - |
-| German     |  28,948 | 3,469 |         67,652 |           - |           187 |
-| Italian    |   4,163 |    73 |         67,652 |           - |             - |
-| Portuguese |   5,112 |   495 |         67,652 |           - |             - |
-| Russian    | 194,401 |    11 |         67,652 |           - |            12 |
-| Spanish    |  23,269 | 3,783 |         67,652 |           - |             - |
-| Swedish    |  42,016 | 4,274 |         67,652 |           - |             - |
-
-`*` Given the current **`beta`** status where words are machine translated.
-
-`†` Adjective-preposition support is in progress [(see iOS issue)](https://github.com/scribe-org/Scribe-iOS/issues/86).
-
-`‡` Only for languages for which preposition annotation is needed.
-
-Updates to the above data can be done using [scribe_data/load/update_data.py](https://github.com/scribe-org/Scribe-Data/tree/main/src/scribe_data/load/update_data.py).
-
-<a id="keyboard-features"></a>
-
-# Keyboard Features [`⇧`](#contents)
-
-Keyboard features are accessed via keyboard shortcuts or the `Scribe button` within the interface. If the button is pressed, the user is presented with three selectable options: `Translate`, `Conjugate` and `Plural` in the interface's language. These commands allow for words to be queried and inserted into the text field followed by a space. The user can also navigate through the presented menus using the arrow keys and make selections with the `return` or `Enter` keys.
-
-**Current features include:**
-
-<a id="translation"></a>
-
-### • Translation [`⇧`](#contents)
-
-The **`beta`** `Translate` feature can translate single words or phrases from English into the language of the current keyboard when the `return` or `Enter` keys are pressed.
-
-As of now translations are not widely available on [Wikidata](https://www.wikidata.org/) [(see iOS issue)](https://github.com/scribe-org/Scribe-iOS/issues/40). The current functionality is thus based on [🤗 Transformers](https://github.com/huggingface/transformers) machine translations of words queried from [Wikidata](https://www.wikidata.org/). The ultimate goal is for the translations and synonyms to all be directly queried.
-
-<a id="verb-conjugation"></a>
-
-### • Verb Conjugation [`⇧`](#contents)
-
-With the `Conjugate` feature, a user is presented with the grammar charts for an entered verb. Pressing an example in the charts inserts the chosen conjugation into the text field.
-
-<a id="noun-plurals"></a>
-
-### • Noun Plurals [`⇧`](#contents)
-
-The `Plural` feature allows a user to enter a noun and then insert its plural into the text field when the `return` or `Enter` keys are pressed.
-
-<a id="word-annotation"></a>
-
-### • Word Annotation [`⇧`](#contents)
-
-Scribe further annotates words in the command bar to help users understand the context of what they're typing. Annotations are displayed once a user has typed a given word and pressed space or by pressing the `Scribe button` while it is selected. The hope is that annotation will help a user remember grammar rules even when not using Scribe.
-
-#### Nouns
-
-Scribe annotates nouns in the command bar according to the following conventions:
-
-- Feminine: colored red 🟥 and marked with (F)
-- Masculine: colored blue 🟦 and marked with (M)
-- Common: colored purple 🟪 and marked with (C)
-- Neutral: colored green 🟩 and marked with (N)
-- Plural: colored orange 🟧 and marked with (PL)
-- More than one: marked with all their forms
-
-The above form abbreviations are translated into their equivalents in the keyboard's language.
-
-#### Prepositions
-
-Scribe also annotates the grammatical cases (accusative, dative, etc) of prepositions in the command bar if there is a relation in the given language.
-
-<a id="language-practice"></a>
-
-# Language Practice [`⇧`](#contents)
-
-A future feature of Scribe is language practice within the app itself. Scribe presents users with information that is directly relevant to their current struggles with a second language. This information can be saved in-app and used to create personalized lessons such as flashcards to reinforce the information that Scribe has provided.
+The [designs for Scribe](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464) are made using [Figma](https://www.figma.com). Those with interest in contributing can [open a design issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=design&template=design_improvement.yml) to make suggestions! Design related issues are marked with the [`design`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3Adesign) label.
 
 <a id="featured-by"></a>
 
@@ -191,6 +107,9 @@ A future feature of Scribe is language practice within the app itself. Scribe pr
 
 <div align="center">
   <br>
-  <a href="https://www.wikidata.org/"><img height="175" src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/wikidata_logo.png" alt="Wikidata"></a>
+  <a href="https://www.wikidata.org/"><img height="175" src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/wikidata_logo.png" alt="Wikidata logo"></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://www.wikipedia.org/"><img height="190" src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/wikipedia_logo.png" alt="Wikipedia logo"></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <br>
 </div>
