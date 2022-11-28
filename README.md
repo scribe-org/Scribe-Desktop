@@ -2,7 +2,7 @@
   <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/logo/ScribeGitHubOrgBanner.png" width=1024 alt="Scribe Logo"></a>
 </div>
 
-[![platforms](https://img.shields.io/static/v1?message=Windows%20│%20macOS%20│%20Linux&logo=windows-terminal&color=0183DC&logoColor=white&label=%20)](https://apps.apple.com/app/scribe-language-keyboards/id1596613886)
+[![platforms](https://img.shields.io/static/v1?message=Windows%20│%20macOS%20│%20Linux&logo=windows-terminal&color=0183DC&logoColor=white&label=%20)](https://github.com/scribe-org/Scribe-Desktop)
 [![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop?label=%20&logo=github)](https://github.com/scribe-org/Scribe-Desktop/issues)
 [![language](https://img.shields.io/badge/Python%203-306998.svg?logo=python&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg?label=%20)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
