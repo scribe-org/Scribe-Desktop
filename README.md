@@ -2,11 +2,11 @@
   <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/logo/ScribeGitHubOrgBanner.png" width=1024 alt="Scribe Logo"></a>
 </div>
 
-[![platforms](https://img.shields.io/static/v1?message=Windows%20│%20macOS%20│%20Linux&logo=windows-terminal&labelColor=5B5B5B&color=999999&logoColor=white&label=%20)](https://apps.apple.com/app/scribe-language-keyboards/id1596613886)
-[![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop)](https://github.com/scribe-org/Scribe-Desktop/issues)
-[![language](https://img.shields.io/badge/Python-3-306998.svg?logo=python&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
-[![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
-[![coc](https://img.shields.io/badge/coc-Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
+[![platforms](https://img.shields.io/static/v1?message=Windows%20│%20macOS%20│%20Linux&logo=windows-terminal&color=0183DC&logoColor=white&label=%20)](https://apps.apple.com/app/scribe-language-keyboards/id1596613886)
+[![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop?label=%20&logo=github)](https://github.com/scribe-org/Scribe-Desktop/issues)
+[![language](https://img.shields.io/badge/Python%203-306998.svg?logo=python&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
+[![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg?label=%20)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
+[![coc](https://img.shields.io/badge/Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
 
 <!-- <a href='https://microsoft.com/store/apps/windows'><img alt='Get it from Microsoft' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/microsoft_store_badge.png' height='60px'/></a>
 <a href='https://apps.apple.com/app/scribe-language-keyboards/id1596613886'><img alt='Available on the App Store' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/app_store_badge.png' height='60px'/></a>
