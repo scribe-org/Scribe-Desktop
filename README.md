@@ -107,6 +107,16 @@ The [designs for Scribe](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scrib
 
 # Powered By
 
+### Contributors
+
+Many thanks to all the [Scribe-Desktop contributors](https://github.com/scribe-org/Scribe-Desktop/graphs/contributors)! 🚀
+
+<a href="https://github.com/scribe-org/Scribe-Desktop/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=scribe-org/Scribe-Desktop" />
+</a>
+
+### Wikimedia Communities
+
 <div align="center">
   <br>
   <a href="https://www.wikidata.org/"><img height="175" src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/wikidata_logo.png" alt="Wikidata logo"></a>
