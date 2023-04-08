@@ -85,7 +85,7 @@ The [designs for Scribe](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scrib
 
 # Featured By [`⇧`](#contents)
 
-<details><summary><strong>Articles and Presentations on Scribe</strong></summary>
+<details open><summary><strong>Articles and Presentations on Scribe</strong></summary>
 <p>
 
 <strong>2023</strong>
