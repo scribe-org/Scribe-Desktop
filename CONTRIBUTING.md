@@ -8,13 +8,32 @@ Following these guidelines helps to communicate that you respect the time of the
 
 If you have questions or would like to communicate with the team, please [join us in our public Matrix chat rooms](https://matrix.to/#/#scribe_community:matrix.org). We'd be happy to hear from you!
 
-## Using the issue tracker
+<a id="contents"></a>
 
-The [issue tracker for Scribe-Desktop](https://github.com/scribe-org/Scribe-Desktop/issues) is the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests) and [submitting pull requests](#pull-requests).
+# **Contents**
 
-<a name="bug-reports"></a>
+- [Issues and projects](#issues-projects)
+- [Bug reports](#bug-reports)
+- [Feature requests](#feature-requests)
+- [Pull requests](#pull-requests)
+- [Data edits](#data-edits)
+- [Localization](#localization)
+- [Documentation](#documentation)
+- [Design](#design)
 
-## Bug reports
+<a id="issues-projects"></a>
+
+# Issues and projects [`⇧`](#contents)
+
+The [issue tracker for Scribe-Desktop](https://github.com/scribe-org/Scribe-Desktop/issues) is the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests) and [submitting pull requests](#pull-requests). Scribe also organizes related issues into [projects](https://github.com/scribe-org/Scribe-Desktop/projects).
+
+> **Note**: Just because an issue is assigned on GitHub doesn't mean that the team isn't interested in your contribution! Feel free to write [in the issues](https://github.com/scribe-org/Scribe-Desktop/issues) and we can potentially reassign it to you.
+
+Be sure to check the [`-next release-`](https://github.com/scribe-org/Scribe-Desktop/labels/-next%20release-) and [`-priority-`](https://github.com/scribe-org/Scribe-Desktop/labels/-priority-) labels in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues) for those that are most important, as well as those marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are tailored for first time contributors.
+
+<a id="bug-reports"></a>
+
+# Bug reports
 
 A bug is a _demonstrable problem_ that is caused by the code in the repository. Good bug reports are extremely helpful - thank you!
 
@@ -36,15 +55,15 @@ Guidelines for bug reports:
 
 Again, thank you for your time in reporting issues!
 
-<a name="feature-requests"></a>
+<a id="feature-requests"></a>
 
-## Feature requests
+# Feature requests
 
 Feature requests are more than welcome! Please take a moment to find out whether your idea fits with the scope and aims of the project. When making a suggestion, provide as much detail and context as possible, and further make clear the degree to which you would like to contribute in its development.
 
-<a name="pull-requests"></a>
+<a id="pull-requests"></a>
 
-## Pull requests
+# Pull requests
 
 Good pull requests - patches, improvements and new features - are a fantastic help. They should remain focused in scope and avoid containing unrelated commits. Note that all contributions to this project will be made under [the specified license](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt) and should follow the coding indentation and style standards (contact us if unsure).
 
@@ -94,6 +113,28 @@ When making a contribution, adhering to the [GitHub flow](https://guides.github.
 
 Thank you in advance for your contributions!
 
-## Branding
+# Data edits [`⇧`](#contents)
+
+Scribe does not accept direct edits to the grammar JSON files as they are sourced from [Wikidata](https://www.wikidata.org/). Edits can be discussed and the [Scribe-Data](https://github.com/scribe-org/Scribe-Data) queries will be changed and ran before an update. If there is a problem with one of the files, then the fix should be made on [Wikidata](https://www.wikidata.org/) and not on Scribe. Feel free to let us know that edits have been made by [opening a data issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=data&template=data_wikidata.yml) or contacting us in the [issues for Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) and we'll be happy to integrate them!
+
+<a id="localization"></a>
+
+# Localization [`⇧`](#contents)
+
+Being an app that focusses on language learning, localization plays a big part in what Scribe will eventually be. Those interested in contributing to localization for the app are welcome to check related issues using the [`localization`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3Alocalization) label, and are further welcome to open their own issues using the [localization](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=design&template=localization.yml) template!
+
+<a id="documentation"></a>
+
+# Documentation [`⇧`](#contents)
+
+Documentation is an invaluable way to contribute to coding projects as it allows others to more easily understand the project structure and contribute. Issues related to documentation are marked with the [`documentation`](https://github.com/scribe-org/Scribe-Desktop/labels/documentation) label.
+
+<a id="design"></a>
+
+# Design [`⇧`](#contents)
+
+<a href="https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/figma_logo.png" height="50" alt="Public Figma Designs" align="right"></a>
+
+Designs for Scribe are done in the [public design file in Figma](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464). Those interested in helping with Scribe's design are also welcome to share their ideas using the [design improvement](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=design&template=design_improvement.yml) template that makes an issue marked with the [`design`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3Adesign) label.
 
 All branding elements such as logos, icons, colors and fonts should follow those that are set out in [scribe-org/Organization](https://github.com/scribe-org/Organization). As the project is fully open source, these elements are also open for discussion. Efforts in making Scribe products professional with a distinct and cohesive identity are much appreciated!
