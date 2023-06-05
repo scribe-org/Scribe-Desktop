@@ -33,7 +33,7 @@ Be sure to check the [`-next release-`](https://github.com/scribe-org/Scribe-Des
 
 <a id="bug-reports"></a>
 
-# Bug reports
+# Bug reports [`⇧`](#contents)
 
 A bug is a _demonstrable problem_ that is caused by the code in the repository. Good bug reports are extremely helpful - thank you!
 
@@ -57,13 +57,13 @@ Again, thank you for your time in reporting issues!
 
 <a id="feature-requests"></a>
 
-# Feature requests
+# Feature requests [`⇧`](#contents)
 
 Feature requests are more than welcome! Please take a moment to find out whether your idea fits with the scope and aims of the project. When making a suggestion, provide as much detail and context as possible, and further make clear the degree to which you would like to contribute in its development.
 
 <a id="pull-requests"></a>
 
-# Pull requests
+# Pull requests [`⇧`](#contents)
 
 Good pull requests - patches, improvements and new features - are a fantastic help. They should remain focused in scope and avoid containing unrelated commits. Note that all contributions to this project will be made under [the specified license](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt) and should follow the coding indentation and style standards (contact us if unsure).
 
