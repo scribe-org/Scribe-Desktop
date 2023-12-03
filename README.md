@@ -77,6 +77,46 @@ Those interested can further check the [`-next release-`](https://github.com/scr
 
 The Scribe road map can be followed in the organization's [project board](https://github.com/orgs/scribe-org/projects/1) where we list the most important issues along with their priority, status and an indication of which sub projects they're included in (if applicable).
 
+### Development environment [`⇧`](#contents)
+
+Those new to coding or wanting to develop their skills are more than welcome to contribute! The general steps to setting up a development environment are:
+
+1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the [Scribe-Desktop repo](https://github.com/scribe-org/Scribe-Desktop), clone your fork, and configure the remotes:
+
+> [!NOTE]
+>
+> <details><summary>Consider using SSH</summary>
+>
+> <p>
+>
+> Alternatively to using HTTPS as in the instructions below, consider SSH to interact with GitHub from the terminal. SSH allows you to connect without a user-pass authentication flow.
+>
+> To run git commands with SSH, remember then to substitute the HTTPS URL, `https://github.com/...`, with the SSH one, `git@github.com:...`.
+>
+> - e.g. Cloning now becomes `git clone git@github.com:<your-username>/Scribe-Desktop.git`
+>
+> GitHub also has their documentation on how to [Generate new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). 🔑
+>
+> </p>
+> </details>
+
+```bash
+# Clone your fork of the repo into the current directory.
+git clone https://github.com/<your-username>/Scribe-Desktop.git
+# Navigate to the newly cloned directory.
+cd Scribe-Desktop
+# Assign the original repo to a remote called "upstream".
+git remote add upstream https://github.com/scribe-org/Scibe-Desktop.git
+```
+
+Now, if you run `git remote -v` you should see two remote repositories named:
+
+- `origin` (forked repository)
+- `upstream` (Scribe-Desktop repository)
+
+> [!NOTE]
+> Feel free to contact the team in the [General room on Matrix](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) if you're having problems getting your environment setup!
+
 ### Data Edits [`⇧`](#contents)
 
 > [!NOTE]\
