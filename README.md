@@ -125,10 +125,9 @@ cd Scribe-Desktop
 git remote add upstream https://github.com/scribe-org/Scibe-Desktop.git
 ```
 
-Now, if you run `git remote -v` you should see two remote repositories named:
-
-- `origin` (forked repository)
-- `upstream` (Scribe-Desktop repository)
+- Now, if you run `git remote -v` you should see two remote repositories named:
+  - `origin` (forked repository)
+  - `upstream` (Scribe-Desktop repository)
 
 > [!NOTE]
 > Feel free to contact the team in the [General room on Matrix](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) if you're having problems getting your environment setup!
