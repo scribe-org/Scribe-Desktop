@@ -32,7 +32,7 @@ Thank you for your interest in contributing to Scribe-Desktop! We look forward t
 - Please join the [public Matrix chat](https://matrix.to/#/#scribe_community:matrix.org) to connect with the community
   - [Matrix](https://matrix.org/) is a network for secure, decentralized communication
   - Scribe would suggest that you use the [Element](https://element.io/) client
-  - The [General](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) channel would be great places to start!
+  - The [General](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) channel would be a great place to start!
   - Feel free to introduce yourself and tell us what your interests are if you're comfortable :)
 - Read through this contributing guide for all the information you need to contribute
 - Look into issues marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) and the [Projects board](https://github.com/orgs/scribe-org/projects/1) to get a better understanding of what you can work on
