@@ -1,0 +1,11 @@
+[package]
+name = "scribe"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+iced = "0.12.1"
+iced_native = "0.10.3"
+rdev = "0.5.3"
