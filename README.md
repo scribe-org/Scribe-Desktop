@@ -179,7 +179,7 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
   <br>
 </div>
 
-# Powered By
+# Powered By [`⇧`](#contents)
 
 ### Contributors
 
