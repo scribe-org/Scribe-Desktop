@@ -1,6 +1,6 @@
 use rdev::Key;
 
-pub fn is_allowed_key(key: &Key) -> Option<char> {
+pub fn allowed_keys(key: &Key) -> Option<char> {
     match key {
         Key::KeyA => Some('a'),
         Key::KeyB => Some('b'),
@@ -39,6 +39,9 @@ pub fn is_allowed_key(key: &Key) -> Option<char> {
         Key::Num8 => Some('8'),
         Key::Num9 => Some('9'),
         Key::Space => Some(' '),
+        Key::Backspace => Some('\x08'),
+        Key::Comma => Some(','),
+        Key::SemiColon => Some(';'),
         _ => None,
     }
 }
