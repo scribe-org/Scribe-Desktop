@@ -4,7 +4,7 @@
 
 [![platforms](https://img.shields.io/static/v1?message=Linux%20│%20macOS%20│%20Windows&logo=windows-terminal&color=0183DC&logoColor=white&label=%20)](https://github.com/scribe-org/Scribe-Desktop)
 [![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop?label=%20&logo=github)](https://github.com/scribe-org/Scribe-Desktop/issues)
-[![language](https://img.shields.io/badge/Python%203-306998.svg?logo=python&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
+[![rust](https://img.shields.io/badge/Rust%201.80-CE412B.svg?logo=rust&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg?label=%20)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
 [![coc](https://img.shields.io/badge/Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
 [![weblate](https://img.shields.io/badge/Weblate-144D3F.svg?logo=weblate&logoColor=ffffff)](https://hosted.weblate.org/projects/scribe/scribe-i18n)
