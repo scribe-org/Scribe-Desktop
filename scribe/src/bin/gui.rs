@@ -1,7 +1,8 @@
-use iced::widget::image::Handle;
-use iced::widget::{Button, Column, Image, Text};
-use iced::window;
-use iced::{executor, Alignment, Application, Command, Element, Settings, Subscription, Theme};
+use iced::widget::{container, image::Handle, row, text, text_input, Column, Image};
+use iced::{
+    alignment::Horizontal, executor, window, Alignment, Application, Command, Element, Length,
+    Settings, Size, Subscription, Theme,
+};
 use iced_futures::subscription;
 use std::io::Read;
 use std::net::TcpListener;
@@ -37,6 +38,10 @@ impl Application for Scribe {
 
     fn title(&self) -> String {
         String::from("Scribe")
+    }
+
+    fn theme(&self) -> Self::Theme {
+        Theme::Light
     }
 
     fn update(&mut self, message: Message) -> Command<Self::Message> {
@@ -78,24 +83,23 @@ impl Application for Scribe {
     }
 
     fn view(&self) -> Element<Message> {
-        let logo_handle = Handle::from_path("../../ScribeBtnPadBlack.png");
-        let logo: Image<Handle> = Image::new(logo_handle);
-        let header = Text::new("Welcome to Scribe").size(30);
+        let logo_data: &[u8] = include_bytes!("../../ScribeBtnPadBlack.png");
+        let logo: Image<Handle> = Image::new(Handle::from_memory(logo_data.to_vec())).width(50);
 
         let keys = self.keys.lock().unwrap().clone();
-        let text_element = if keys.is_empty() {
-            Text::new("Your translation here ...")
-        } else {
-            Text::new(keys)
-        };
-        let translate_button = Button::new("Translate");
+        let text_for_translation = text_input("Your translation here ...", &keys);
+
+        let title_row = container(row!(text("Welcome to Scribe").size(30)))
+            .width(Length::Fill)
+            .align_x(Horizontal::Center);
+        let content_row = row!(logo, text_for_translation).align_items(Alignment::Center);
 
         Column::new()
-            .push(logo)
-            .push(header)
-            .push(text_element)
-            .push(translate_button)
-            .align_items(Alignment::Center)
+            .width(Length::Fill)
+            .padding(10)
+            .spacing(10)
+            .push(title_row)
+            .push(content_row)
             .into()
     }
 }
@@ -103,7 +107,10 @@ impl Application for Scribe {
 fn main() -> Result<(), iced::Error> {
     let settings = Settings {
         window: window::Settings {
-            size: iced::Size::new(400.0, 400.0),
+            size: Size {
+                width: 400.0,
+                height: 200.0,
+            },
             position: window::Position::Centered,
             resizable: true,
             decorations: true,
