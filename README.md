@@ -135,8 +135,27 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
   - `origin` (forked repository)
   - `upstream` (Scribe-Desktop repository)
 
+2. (Optional) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
+
+```bash
+pip install pre-commit
+pre-commit install
+# pre-commit run --all-files
+```
+
+3. Run the following to spin up a local copy of the Scribe-Desktop GUI:
+
+```bash
+cd scribe
+cargo build
+cargo run --bin scribe
+```
+
+4. You may need to give your terminal or IDE permission for your keyboard strokes to be read
+   - You may also need to restart the application and then run `cargo run --bin scribe` again
+
 > [!NOTE]
-> Feel free to contact the team in the [General room on Matrix](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) if you're having problems getting your environment setup!
+> Feel free to contact the team in the [Desktop room on Matrix](https://matrix.to/#/#ScribeDesktop:matrix.org) if you're having problems getting your environment setup!
 
 <a id="featured-by"></a>
 

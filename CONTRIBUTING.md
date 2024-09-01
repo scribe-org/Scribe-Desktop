@@ -32,7 +32,7 @@ Thank you for your interest in contributing to Scribe-Desktop! We look forward t
 - Please join the [public Matrix chat](https://matrix.to/#/#scribe_community:matrix.org) to connect with the community
   - [Matrix](https://matrix.org/) is a network for secure, decentralized communication
   - Scribe would suggest that you use the [Element](https://element.io/) client
-  - The [General](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) channel would be a great place to start!
+  - The [Desktop](https://matrix.to/#/#ScribeDesktop:matrix.org) channel would be a great place to start!
   - Feel free to introduce yourself and tell us what your interests are if you're comfortable :)
 - Read through this contributing guide for all the information you need to contribute
 - Look into issues marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) and the [Projects board](https://github.com/orgs/scribe-org/projects/1) to get a better understanding of what you can work on
@@ -77,8 +77,27 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
   - `origin` (forked repository)
   - `upstream` (Scribe-Desktop repository)
 
+2. (Optional) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
+
+```bash
+pip install pre-commit
+pre-commit install
+# pre-commit run --all-files
+```
+
+3. Run the following to spin up a local copy of the Scribe-Desktop GUI:
+
+```bash
+cd scribe
+cargo build
+cargo run --bin scribe
+```
+
+4. You may need to give your terminal or IDE permission for your keyboard strokes to be read
+   - You may also need to restart the application and then run `cargo run --bin scribe` again
+
 > [!NOTE]
-> Feel free to contact the team in the [General room on Matrix](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) if you're having problems getting your environment setup!
+> Feel free to contact the team in the [Desktop room on Matrix](https://matrix.to/#/#ScribeDesktop:matrix.org) if you're having problems getting your environment setup!
 
 <a id="issues-projects"></a>
 
