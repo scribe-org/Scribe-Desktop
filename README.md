@@ -4,7 +4,7 @@
 
 [![platforms](https://img.shields.io/static/v1?message=Linux%20│%20macOS%20│%20Windows&logo=windows-terminal&color=0183DC&logoColor=white&label=%20)](https://github.com/scribe-org/Scribe-Desktop)
 [![issues](https://img.shields.io/github/issues/scribe-org/Scribe-Desktop?label=%20&logo=github)](https://github.com/scribe-org/Scribe-Desktop/issues)
-[![language](https://img.shields.io/badge/Python%203-306998.svg?logo=python&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
+[![rust](https://img.shields.io/badge/Rust%201.80-CE412B.svg?logo=rust&logoColor=ffffff)](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md)
 [![license](https://img.shields.io/github/license/scribe-org/Scribe-Desktop.svg?label=%20)](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt)
 [![coc](https://img.shields.io/badge/Contributor%20Covenant-ff69b4.svg)](https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/CODE_OF_CONDUCT.md)
 [![weblate](https://img.shields.io/badge/Weblate-144D3F.svg?logo=weblate&logoColor=ffffff)](https://hosted.weblate.org/projects/scribe/scribe-i18n)
@@ -135,8 +135,27 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
   - `origin` (forked repository)
   - `upstream` (Scribe-Desktop repository)
 
+2. (Optional) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
+
+```bash
+pip install pre-commit
+pre-commit install
+# pre-commit run --all-files
+```
+
+3. Run the following to spin up a local copy of the Scribe-Desktop GUI:
+
+```bash
+cd scribe
+cargo build
+cargo run --bin scribe
+```
+
+4. You may need to give your terminal or IDE permission for your keyboard strokes to be read
+   - You may also need to restart the application and then run `cargo run --bin scribe` again
+
 > [!NOTE]
-> Feel free to contact the team in the [General room on Matrix](https://matrix.to/#/!yQJjLmluvlkWttNhKo:matrix.org?via=matrix.org) if you're having problems getting your environment setup!
+> Feel free to contact the team in the [Desktop room on Matrix](https://matrix.to/#/#ScribeDesktop:matrix.org) if you're having problems getting your environment setup!
 
 <a id="featured-by"></a>
 
