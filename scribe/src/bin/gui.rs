@@ -1,12 +1,12 @@
 use iced::widget::{container, image::Handle, row, text, text_input, Column, Image};
 use iced::{
-    alignment::Horizontal, executor, window, Alignment, Application, Command, Element, Length,
-    Settings, Size, Subscription, Theme,
+    alignment::Horizontal, executor, window, Alignment, Application, Command, Element, Font,
+    Length, Settings, Size, Subscription, Theme,
 };
 use iced_futures::subscription;
+use scribe::CustomTextInput;
 use std::io::Read;
 use std::net::TcpListener;
-use std::sync::{Arc, Mutex};
 
 #[derive(Debug, Clone)]
 pub enum Message {
@@ -15,13 +15,13 @@ pub enum Message {
 }
 
 struct Scribe {
-    keys: Arc<Mutex<String>>,
+    keys: String,
 }
 
 impl Default for Scribe {
     fn default() -> Self {
         Scribe {
-            keys: Arc::new(Mutex::new(String::new())),
+            keys: String::new(),
         }
     }
 }
@@ -47,7 +47,7 @@ impl Application for Scribe {
     fn update(&mut self, message: Message) -> Command<Self::Message> {
         match message {
             Message::KeyReceived(char) => {
-                let mut keys = self.keys.lock().unwrap();
+                let keys = &mut self.keys;
                 if char == '\x08' {
                     keys.pop();
                 } else {
@@ -60,7 +60,7 @@ impl Application for Scribe {
     }
 
     fn subscription(&self) -> Subscription<Message> {
-        subscription::unfold((), self.keys.clone(), |keys_arc| async move {
+        subscription::unfold((), self.keys.clone(), |keys| async move {
             let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
             let mut incoming = listener.incoming();
 
@@ -68,17 +68,17 @@ impl Application for Scribe {
                 if let Ok(mut stream) = stream {
                     let mut buffer = [0; 1];
                     if let Ok(_) = stream.read_exact(&mut buffer) {
-                        if let Some(received_char) = char::from_u32(buffer[0] as u32) {
-                            return (Message::KeyReceived(received_char), keys_arc);
+                        if let Some(received_char) = char::from_u32(buffer[0].into()) {
+                            return (Message::KeyReceived(received_char), keys);
                         } else {
                             println!("Received an invalid character");
-                            return (Message::NoOp, keys_arc);
+                            return (Message::NoOp, keys);
                         }
                     }
                 }
             }
 
-            (Message::NoOp, keys_arc)
+            (Message::NoOp, keys)
         })
     }
 
@@ -86,8 +86,9 @@ impl Application for Scribe {
         let logo_data: &[u8] = include_bytes!("../../ScribeBtnPadBlack.png");
         let logo: Image<Handle> = Image::new(Handle::from_memory(logo_data.to_vec())).width(50);
 
-        let keys = self.keys.lock().unwrap().clone();
-        let text_for_translation = text_input("Your translation here ...", &keys);
+        let text_for_translation = text_input("Your translation here ...", &self.keys.clone())
+            .font(Font::DEFAULT)
+            .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {})));
 
         let title_row = container(row!(text("Welcome to Scribe").size(30)))
             .width(Length::Fill)
@@ -109,7 +110,7 @@ fn main() -> Result<(), iced::Error> {
         window: window::Settings {
             size: Size {
                 width: 400.0,
-                height: 200.0,
+                height: 100.0,
             },
             position: window::Position::Centered,
             resizable: true,
