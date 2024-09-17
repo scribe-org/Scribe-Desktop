@@ -15,9 +15,9 @@
 <a href='https://apps.apple.com/app/scribe-language-keyboards/id1596613886'><img alt='Available on the App Store' src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/app_store_badge.png' height='60px'/></a>
 <a href='https://flathub.org/home'><img src='https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/flathub_badge.png' alt='Download on Flathub' height='60px' /></a> -->
 
-## Typing GUI for language learners on Windows, Mac and Linux
+### Typing GUI for language learners on Windows, Mac and Linux
 
-### Planned port of [Scribe-iOS](https://github.com/scribe-org/Scribe-iOS): see [Issues](https://github.com/scribe-org/Scribe-Desktop/issues)
+#### Planned port of [Scribe-iOS](https://github.com/scribe-org/Scribe-iOS): see [Issues](https://github.com/scribe-org/Scribe-Desktop/issues)
 
 **Scribe-Desktop** is a language learning interface for Windows, Mac and Linux operating systems. The Scribe GUI provides needed information as the user types and serves as a field for input commands. Features include translation **`(beta)`**, verb conjugation and word annotation that give users the tools needed to communicate with confidence.
 
