@@ -43,9 +43,6 @@ pub fn allowed_keys(key: &Key) -> Option<char> {
         Key::Backspace => Some('\x08'),
         Key::Comma => Some(','),
         Key::SemiColon => Some(';'),
-        Key::Backspace => Some('\x08'),
-        Key::Comma => Some(','),
-        Key::SemiColon => Some(';'),
         Key::Period => Some('.'),
         Key::Slash => Some('/'),
         Key::Backslash => Some('\\'),
@@ -56,7 +53,7 @@ pub fn allowed_keys(key: &Key) -> Option<char> {
         Key::RightBracket => Some(']'),
         Key::BackQuote => Some('`'),
         Key::Tab => Some('\t'),
-        Key::Quote => Some('"'), // Double quotes (")
+        Key::Quote => Some('"'),
         _ => None,
     }
 }
