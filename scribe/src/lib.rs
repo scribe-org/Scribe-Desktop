@@ -43,6 +43,15 @@ pub fn allowed_keys(key: &Key) -> Option<char> {
         Key::Backspace => Some('\x08'),
         Key::Comma => Some(','),
         Key::SemiColon => Some(';'),
+        Key::Slash => Some('/'),
+        Key::BackSlash => Some('\\'),
+        Key::Equal => Some('='),
+        Key::Minus => Some('-'),
+        Key::LeftBracket => Some('['),
+        Key::RightBracket => Some(']'),
+        Key::BackQuote => Some('`'),
+        Key::Tab => Some('\t'),
+        Key::Quote => Some('"'),
         _ => None,
     }
 }
