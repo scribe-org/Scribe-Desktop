@@ -82,7 +82,10 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
 - For Linux and macOS:
 
 Run the following command in your terminal:
-`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 Follow the on-screen instructions to complete the installation. You can find more details in the [official Rust documentation](https://doc.rust-lang.org/book/ch01-01-installation.html).
 
@@ -97,7 +100,7 @@ rustc --version
 cargo --version
 ```
 
-3. (Optional) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
+3. (Suggested) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
 
 ```bash
 pip install pre-commit
