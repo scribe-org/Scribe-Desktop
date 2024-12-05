@@ -92,10 +92,14 @@ impl Application for Scribe {
         let logo_data: &[u8] = include_bytes!("../../ScribeBtnPadBlack.png");
         let logo_handle = Handle::from_memory(logo_data.to_vec());
         let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
-        let logo_row: Image<Handle> = Image::new(logo_handle).width(50);
+        // let logo_row: Image<Handle> = Image::new(logo_handle).width(50);
 
-        let listening_button: Button<'_, Message, Theme> =
-            Button::new(logo_button).on_press(Message::ToggleListening);
+        let listening_button = Button::new(logo_button)
+            .style(iced::theme::Button::Text)
+            .on_press(Message::ToggleListening);
+
+        //let listening_button: Button<'_, Message, Theme> =
+        //   Button::new(logo_button).on_press(Message::ToggleListening);
 
         let text_for_translation = text_input("Your translation here ...", &self.keys.clone())
             .font(Font::DEFAULT)
