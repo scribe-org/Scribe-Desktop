@@ -57,7 +57,6 @@ pub fn allowed_keys(key: &Key) -> Option<char> {
 }
 
 pub struct CustomTextInput;
-pub struct CustomButtonStyle;
 
 impl text_input::StyleSheet for CustomTextInput {
     type Style = iced::Theme;
