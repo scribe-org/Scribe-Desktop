@@ -1,4 +1,4 @@
-use iced::{widget::button, widget::text_input, Background, Border, Color};
+use iced::{widget::text_input, Background, Border, Color};
 use rdev::Key;
 
 pub fn allowed_keys(key: &Key) -> Option<char> {
