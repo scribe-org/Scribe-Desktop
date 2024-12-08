@@ -1,4 +1,4 @@
-use iced::widget::{container, image::Handle, row, text, text_input, Column, Image};
+use iced::widget::{container, image::Handle, row, text, text_input, Button, Column, Image};
 use iced::{
     alignment::Horizontal, executor, window, Alignment, Application, Command, Element, Font,
     Length, Settings, Size, Subscription, Theme,
@@ -11,17 +11,20 @@ use std::net::TcpListener;
 #[derive(Debug, Clone)]
 pub enum Message {
     KeyReceived(char),
+    ToggleListening,
     NoOp,
 }
 
 struct Scribe {
     keys: String,
+    is_listening: bool,
 }
 
 impl Default for Scribe {
     fn default() -> Self {
         Scribe {
             keys: String::new(),
+            is_listening: true,
         }
     }
 }
@@ -47,13 +50,16 @@ impl Application for Scribe {
     fn update(&mut self, message: Message) -> Command<Self::Message> {
         match message {
             Message::KeyReceived(char) => {
-                let keys = &mut self.keys;
-                if char == '\x08' {
-                    keys.pop();
-                } else {
-                    keys.push(char);
+                if self.is_listening {
+                    let keys = &mut self.keys;
+                    if char == '\x08' {
+                        keys.pop();
+                    } else {
+                        keys.push(char);
+                    }
                 }
             }
+            Message::ToggleListening => self.is_listening = !self.is_listening,
             Message::NoOp => todo!(),
         }
         Command::none()
@@ -84,7 +90,12 @@ impl Application for Scribe {
 
     fn view(&self) -> Element<Message> {
         let logo_data: &[u8] = include_bytes!("../../ScribeBtnPadBlack.png");
-        let logo: Image<Handle> = Image::new(Handle::from_memory(logo_data.to_vec())).width(50);
+        let logo_handle = Handle::from_memory(logo_data.to_vec());
+        let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
+
+        let listening_button = Button::new(logo_button)
+            .style(iced::theme::Button::Text)
+            .on_press(Message::ToggleListening);
 
         let text_for_translation = text_input("Your translation here ...", &self.keys.clone())
             .font(Font::DEFAULT)
@@ -93,7 +104,8 @@ impl Application for Scribe {
         let title_row = container(row!(text("Welcome to Scribe").size(30)))
             .width(Length::Fill)
             .align_x(Horizontal::Center);
-        let content_row = row!(logo, text_for_translation).align_items(Alignment::Center);
+        let content_row =
+            row!(listening_button, text_for_translation).align_items(Alignment::Center);
 
         Column::new()
             .width(Length::Fill)
