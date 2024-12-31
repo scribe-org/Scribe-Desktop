@@ -13,6 +13,7 @@ If you have questions or would like to communicate with the team, please [join u
 # **Contents**
 
 - [First steps as a contributor](#first-steps)
+- [Learning the tech stack](#learning-the-tech-)
 - [Development environment](#dev-env)
 - [Issues and projects](#issues-projects)
 - [Bug reports](#bug-reports)
@@ -38,6 +39,25 @@ Thank you for your interest in contributing to Scribe-Desktop! We look forward t
 - Look into issues marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22) and the [Projects board](https://github.com/orgs/scribe-org/projects/1) to get a better understanding of what you can work on
 - Check out our [public designs on Figma](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?type=design&node-id=405-464&mode=design&t=E3ccS9Z8MDVSizQ4-0) to understand Scribes's goals and direction
 - Consider joining our [bi-weekly developer sync](https://etherpad.wikimedia.org/p/scribe-dev-sync)!
+
+<a id="learning-the-tech-"></a>
+
+## Learning the tech stack [`⇧`](#contents)
+
+Scribe-Desktop is very open to contributions from people in the early stages of their coding journey! The following is a select list of documentation pages to help you understand the technologies we use.
+
+As Scribe-Desktop is written in [Rust](https://www.rust-lang.org/), we'd suggest all contributors to have read [The Rust Book](https://doc.rust-lang.org/book/).
+
+<details><summary>Docs for those new to programming</summary>
+<p>
+
+- [Mozilla Developer Network Learning Area](https://developer.mozilla.org/en-US/docs/Learn)
+  - Doing MDN sections for HTML, CSS and JavaScript is the best ways to get into web development!
+- [Open Source Guides](https://opensource.guide/)
+  - Guides from GitHub about open-source software including how to start and much more!
+
+</p>
+</details>
 
 <a id="dev-env"></a>
 
