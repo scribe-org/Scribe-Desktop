@@ -103,7 +103,26 @@ Scribe does not accept direct edits to the grammar JSON files as they are source
 
 Those new to coding or wanting to develop their skills are more than welcome to contribute! The general steps to setting up a development environment are:
 
-1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the [Scribe-Desktop repo](https://github.com/scribe-org/Scribe-Desktop), clone your fork, and configure the remotes:
+1. First and foremost, please see the suggested IDE setup in the dropdown below to make sure that your editor is ready for development.
+
+> [!IMPORTANT]
+>
+> <details><summary>Suggested IDE setup</summary>
+>
+> <p>
+>
+> VS Code
+>
+> Install the following extensions:
+>
+> - [qwtel.sqlite-viewer](https://marketplace.visualstudio.com/items?itemName=qwtel.sqlite-viewer)
+> - [streetsidesoftware.code-spell-checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+> - [rust-lang.rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+>
+> </p>
+> </details>
+
+2. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the [Scribe-Desktop repo](https://github.com/scribe-org/Scribe-Desktop), clone your fork, and configure the remotes:
 
 > [!NOTE]
 >
@@ -135,7 +154,30 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
   - `origin` (forked repository)
   - `upstream` (Scribe-Desktop repository)
 
-2. (Optional) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
+3. Install Rust and Cargo:
+
+- For Linux and macOS:
+
+Run the following command in your terminal:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+Follow the on-screen instructions to complete the installation. You can find more details in the [official Rust documentation](https://doc.rust-lang.org/book/ch01-01-installation.html).
+
+- For Windows:
+
+Download and run [rustup-init.exe](https://rustup.rs/). Follow the instructions in the installer. For more details, visit the [Rust Windows installation guide](https://www.rust-lang.org/tools/install).
+
+After installation, you may need to restart your terminal for the changes to take effect. Verify the installation by running:
+
+```bash
+rustc --version
+cargo --version
+```
+
+4. (Suggested) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
 
 ```bash
 pip install pre-commit
@@ -143,7 +185,7 @@ pre-commit install
 # pre-commit run --all-files
 ```
 
-3. Run the following to spin up a local copy of the Scribe-Desktop GUI:
+5. Run the following to spin up a local copy of the Scribe-Desktop GUI:
 
 ```bash
 cd scribe
@@ -151,7 +193,7 @@ cargo build
 cargo run --bin scribe
 ```
 
-4. You may need to give your terminal or IDE permission for your keyboard strokes to be read
+6. You may need to give your terminal or IDE permission for your keyboard strokes to be read
    - You may also need to restart the application and then run `cargo run --bin scribe` again
 
 > [!NOTE]
