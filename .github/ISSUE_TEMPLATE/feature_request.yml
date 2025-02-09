@@ -1,6 +1,6 @@
 name: ✨ Feature request
 description: Have a new idea or feature for Scribe-Desktop? Please suggest!
-labels: ["feature"]
+type: "feature"
 body:
   - type: checkboxes
     id: terms
