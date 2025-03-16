@@ -1,10 +1,10 @@
-use iced::widget::{container, image::Handle, row, text, text_input, Button, Column, Image};
+use iced::widget::{image::Handle, text_input, Button, Column, Container, Image, Row};
 use iced::{
-    alignment::Horizontal, executor, window, Alignment, Application, Command, Element, Font,
-    Length, Settings, Size, Subscription, Theme,
+    executor, window, Alignment, Application, Command, Element, Font, Length, Settings, Size,
+    Subscription, Theme,
 };
 use iced_futures::subscription;
-use scribe::CustomTextInput;
+use scribe::styles::CustomTextInput;
 use std::io::Read;
 use std::net::TcpListener;
 
@@ -12,12 +12,18 @@ use std::net::TcpListener;
 pub enum Message {
     KeyReceived(char),
     ToggleListening,
+    ToggleTooltips,
+    Translate,
+    Conjugate,
+    Plural,
+    WordInfo,
     NoOp,
 }
 
 struct Scribe {
     keys: String,
     is_listening: bool,
+    tool_tips: bool,
 }
 
 impl Default for Scribe {
@@ -25,6 +31,7 @@ impl Default for Scribe {
         Scribe {
             keys: String::new(),
             is_listening: true,
+            tool_tips: false,
         }
     }
 }
@@ -60,6 +67,11 @@ impl Application for Scribe {
                 }
             }
             Message::ToggleListening => self.is_listening = !self.is_listening,
+            Message::ToggleTooltips => self.tool_tips = !self.tool_tips,
+            Message::Translate => println!("Translate"),
+            Message::Conjugate => println!("Conjugate"),
+            Message::Plural => println!("Plural"),
+            Message::WordInfo => println!("Word Info"),
             Message::NoOp => todo!(),
         }
         Command::none()
@@ -89,30 +101,47 @@ impl Application for Scribe {
     }
 
     fn view(&self) -> Element<Message> {
-        let logo_data: &[u8] = include_bytes!("../../ScribeBtnPadBlack.png");
+        let logo_data: &[u8] = include_bytes!("../../ScribeBtnPad.png");
         let logo_handle = Handle::from_memory(logo_data.to_vec());
         let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
 
-        let listening_button = Button::new(logo_button)
-            .style(iced::theme::Button::Text)
-            .on_press(Message::ToggleListening);
-
-        let text_for_translation = text_input("Your translation here ...", &self.keys.clone())
+        let text_for_translation = text_input("Your translation here...", &self.keys.clone())
             .font(Font::DEFAULT)
             .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {})));
 
-        let title_row = container(row!(text("Welcome to Scribe").size(30)))
-            .width(Length::Fill)
-            .align_x(Horizontal::Center);
-        let content_row =
-            row!(listening_button, text_for_translation).align_items(Alignment::Center);
+        let toggle_button = Button::new(logo_button).on_press(Message::ToggleTooltips);
 
-        Column::new()
-            .width(Length::Fill)
-            .padding(10)
+        let top_row = Row::new()
             .spacing(10)
-            .push(title_row)
-            .push(content_row)
+            .align_items(Alignment::Center)
+            .push(toggle_button)
+            .push(text_for_translation);
+
+        let mut layout = Column::new()
+            .width(Length::Shrink)
+            .spacing(10)
+            .push(top_row);
+
+        if self.tool_tips {
+            let buttons = vec![
+                Button::new("Translate").on_press(Message::Translate),
+                Button::new("Conjugate").on_press(Message::Conjugate),
+                Button::new("Plural").on_press(Message::Plural),
+                Button::new("Word Info").on_press(Message::WordInfo),
+            ];
+            for btn in buttons {
+                layout = layout.push(btn);
+            }
+        }
+
+        Container::new(layout)
+            .width(Length::Fill)
+            .height(Length::Fill)
+            .padding(10)
+            .style(|_theme: &Theme| iced::widget::container::Appearance {
+                background: Some(iced::Color::from_rgb8(0x4C, 0xAD, 0xE6).into()), // #4CADE6
+                ..Default::default()
+            })
             .into()
     }
 }
@@ -122,7 +151,7 @@ fn main() -> Result<(), iced::Error> {
         window: window::Settings {
             size: Size {
                 width: 400.0,
-                height: 100.0,
+                height: 300.0,
             },
             position: window::Position::Centered,
             resizable: true,
