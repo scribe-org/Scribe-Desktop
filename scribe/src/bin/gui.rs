@@ -17,7 +17,6 @@ pub enum Message {
     Translate,
     Conjugate,
     Plural,
-    WordInfo,
     NoOp,
 }
 
@@ -72,7 +71,6 @@ impl Application for Scribe {
             Message::Translate => println!("Translate"),
             Message::Conjugate => println!("Conjugate"),
             Message::Plural => println!("Plural"),
-            Message::WordInfo => println!("Word Info"),
             Message::NoOp => todo!(),
         }
         Command::none()
@@ -112,32 +110,35 @@ impl Application for Scribe {
 
         let toggle_button = Button::new(logo_button).on_press(Message::ToggleTooltips);
 
+        let mut input_and_buttons = Column::new().spacing(10).width(Length::Fill);
+
+        input_and_buttons = input_and_buttons.push(text_for_translation);
+
+        if self.tool_tips {
+            let button_row = Row::new()
+                .spacing(10)
+                .align_items(Alignment::Center)
+                .push(Button::new("Translate").on_press(Message::Translate))
+                .push(Button::new("Conjugate").on_press(Message::Conjugate))
+                .push(Button::new("Plural").on_press(Message::Plural));
+
+            input_and_buttons = input_and_buttons.push(button_row);
+        }
+
         let top_row = Row::new()
             .spacing(10)
             .align_items(Alignment::Center)
             .push(toggle_button)
-            .push(text_for_translation);
+            .push(input_and_buttons);
 
         let mut layout = Column::new()
             .width(Length::Shrink)
             .spacing(10)
             .push(top_row);
 
-        if self.tool_tips {
-            let buttons = vec![
-                Button::new("Translate").on_press(Message::Translate),
-                Button::new("Conjugate").on_press(Message::Conjugate),
-                Button::new("Plural").on_press(Message::Plural),
-                Button::new("Word Info").on_press(Message::WordInfo),
-            ];
-            for btn in buttons {
-                layout = layout.push(btn);
-            }
-        }
-
         Container::new(layout)
             .width(Length::Fill)
-            .height(Length::Fill)
+            .height(Length::Shrink)
             .padding(10)
             .style(|_theme: &Theme| iced::widget::container::Appearance {
                 background: Some(iced::Color::from_rgb8(0x4C, 0xAD, 0xE6).into()), // #4CADE6
