@@ -67,7 +67,17 @@ impl Application for Scribe {
                 }
             }
             Message::ToggleListening => self.is_listening = !self.is_listening,
-            Message::ToggleTooltips => self.tool_tips = !self.tool_tips,
+            Message::ToggleTooltips => {
+                self.tool_tips = !self.tool_tips;
+                let height = if self.tool_tips { 92.0 } else { 50.0 };
+                return window::resize(
+                    window::Id::MAIN,
+                    Size {
+                        width: 400.0,
+                        height,
+                    },
+                );
+            }
             Message::Translate => println!("Translate"),
             Message::Conjugate => println!("Conjugate"),
             Message::Plural => println!("Plural"),
@@ -134,6 +144,7 @@ impl Application for Scribe {
         let mut layout = Column::new()
             .width(Length::Shrink)
             .spacing(10)
+            .align_items(Alignment::Center)
             .push(top_row);
 
         Container::new(layout)
@@ -151,12 +162,16 @@ impl Application for Scribe {
 fn main() -> Result<(), iced::Error> {
     let settings = Settings {
         window: window::Settings {
+            min_size: Some(Size {
+                width: 400.0,
+                height: 50.0,
+            }),
             size: Size {
                 width: 400.0,
-                height: 300.0,
+                height: 0.0,
             },
             position: window::Position::Centered,
-            resizable: true,
+            resizable: false,
             decorations: true,
             ..window::Settings::default()
         },
