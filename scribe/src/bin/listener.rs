@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 use rdev::{listen, Event, EventType};
 use scribe::allowed_keys;
 use std::io::Write;
