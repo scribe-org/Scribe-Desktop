@@ -6,6 +6,7 @@ use iced::{
 };
 use iced_futures::subscription;
 use scribe::styles::CustomTextInput;
+use scribe::AppState;
 use std::io::Read;
 use std::net::TcpListener;
 
@@ -17,6 +18,7 @@ pub enum Message {
     Translate,
     Conjugate,
     Plural,
+    ToggleTheme,
     NoOp,
 }
 
@@ -24,6 +26,7 @@ struct Scribe {
     keys: String,
     is_listening: bool,
     tool_tips: bool,
+    state: AppState,
 }
 
 impl Default for Scribe {
@@ -32,6 +35,7 @@ impl Default for Scribe {
             keys: String::new(),
             is_listening: true,
             tool_tips: false,
+            state: AppState::default(),
         }
     }
 }
@@ -51,7 +55,11 @@ impl Application for Scribe {
     }
 
     fn theme(&self) -> Self::Theme {
-        Theme::Light
+        if self.state.is_dark_theme {
+            Theme::Dark
+        } else {
+            Theme::Light
+        }
     }
 
     fn update(&mut self, message: Message) -> Command<Self::Message> {
@@ -81,6 +89,7 @@ impl Application for Scribe {
             Message::Translate => println!("Translate"),
             Message::Conjugate => println!("Conjugate"),
             Message::Plural => println!("Plural"),
+            Message::ToggleTheme => self.state.toggle_theme(),
             Message::NoOp => todo!(),
         }
         Command::none()
@@ -116,7 +125,9 @@ impl Application for Scribe {
 
         let text_for_translation = text_input("Your translation here...", &self.keys.clone())
             .font(Font::DEFAULT)
-            .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {})));
+            .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {
+                state: self.state,
+            })));
 
         let toggle_button = Button::new(logo_button).on_press(Message::ToggleTooltips);
 
@@ -147,13 +158,23 @@ impl Application for Scribe {
             .align_items(Alignment::Center)
             .push(top_row);
 
+        let is_dark = self.state.is_dark_theme;
+
         Container::new(layout)
             .width(Length::Fill)
             .height(Length::Shrink)
             .padding(10)
-            .style(|_theme: &Theme| iced::widget::container::Appearance {
-                background: Some(iced::Color::from_rgb8(0x4C, 0xAD, 0xE6).into()), // #4CADE6
-                ..Default::default()
+            .style(move |_theme: &Theme| {
+                let background_color = if is_dark {
+                    iced::Color::from_rgb8(0x1E, 0x1E, 0x1E) // Dark mode background
+                } else {
+                    iced::Color::from_rgb8(0xCE, 0xD2, 0xD9) // Light mode background
+                };
+
+                iced::widget::container::Appearance {
+                    background: Some(background_color.into()),
+                    ..Default::default()
+                }
             })
             .into()
     }
