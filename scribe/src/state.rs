@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
 #[derive(Debug, Clone, Copy)]
 pub struct AppState {
     pub is_dark_theme: bool,
