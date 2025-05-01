@@ -152,7 +152,7 @@ impl Application for Scribe {
             .push(toggle_button)
             .push(input_and_buttons);
 
-        let mut layout = Column::new()
+        let layout = Column::new()
             .width(Length::Shrink)
             .spacing(10)
             .align_items(Alignment::Center)

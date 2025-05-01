@@ -1,8 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-use iced::{
-    widget::{button, text_input},
-    Background, Border, Color, Vector,
-};
+use iced::{widget::text_input, Background, Border, Color};
 
 use iced::widget::text_input::Appearance as TextInputAppearance;
 
