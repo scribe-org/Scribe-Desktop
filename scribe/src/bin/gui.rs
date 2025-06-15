@@ -5,6 +5,7 @@ use iced::{
     Subscription, Theme,
 };
 use iced_futures::subscription;
+use scribe::styles::ButtonStyle;
 use scribe::styles::CustomTextInput;
 use scribe::AppState;
 use std::io::Read;
@@ -27,16 +28,35 @@ struct Scribe {
     is_listening: bool,
     tool_tips: bool,
     state: AppState,
+    theme: Theme,
+    manual_override: bool,
 }
 
 impl Default for Scribe {
     fn default() -> Self {
+        let detected_theme = detect_system_theme();
+        let is_dark = matches!(detected_theme, Theme::Dark);
+        println!("Initial system theme detected: {:?}", detected_theme);
         Scribe {
             keys: String::new(),
             is_listening: true,
             tool_tips: false,
-            state: AppState::default(),
+            state: AppState {
+                is_dark_theme: is_dark,
+                ..AppState::default()
+            },
+            theme: detected_theme.clone(),
+            manual_override: false,
         }
+    }
+}
+
+fn detect_system_theme() -> Theme {
+    let mode = dark_light::detect();
+    match mode {
+        dark_light::Mode::Dark => Theme::Dark,
+        dark_light::Mode::Light => Theme::Light,
+        dark_light::Mode::Default => Theme::Light,
     }
 }
 
@@ -55,11 +75,7 @@ impl Application for Scribe {
     }
 
     fn theme(&self) -> Self::Theme {
-        if self.state.is_dark_theme {
-            Theme::Dark
-        } else {
-            Theme::Light
-        }
+        self.theme.clone()
     }
 
     fn update(&mut self, message: Message) -> Command<Self::Message> {
@@ -89,8 +105,21 @@ impl Application for Scribe {
             Message::Translate => println!("Translate"),
             Message::Conjugate => println!("Conjugate"),
             Message::Plural => println!("Plural"),
-            Message::ToggleTheme => self.state.toggle_theme(),
-            Message::NoOp => todo!(),
+            Message::ToggleTheme => {
+                // Manual theme toggle
+                self.manual_override = !self.manual_override; // Toggle override instead of always setting true
+                self.state.toggle_theme();
+                self.theme = if self.state.is_dark_theme {
+                    Theme::Dark
+                } else {
+                    Theme::Light
+                };
+                println!(
+                    "Manual theme toggle - override: {}, theme: {:?}",
+                    self.manual_override, self.theme
+                );
+            }
+            Message::NoOp => {}
         }
         Command::none()
     }
@@ -119,7 +148,13 @@ impl Application for Scribe {
     }
 
     fn view(&self) -> Element<Message> {
-        let logo_data: &[u8] = include_bytes!("../../ScribeBtnPad.png");
+        let is_dark = self.state.is_dark_theme;
+
+        let logo_data: &[u8] = if is_dark {
+            include_bytes!("../../ScribeBtnPad.png")
+        } else {
+            include_bytes!("../../ScribeBtnPadBlack.png")
+        };
         let logo_handle = Handle::from_memory(logo_data.to_vec());
         let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
 
@@ -129,19 +164,39 @@ impl Application for Scribe {
                 state: self.state,
             })));
 
-        let toggle_button = Button::new(logo_button).on_press(Message::ToggleTooltips);
+        let toggle_button = Button::new(logo_button)
+            .on_press(Message::ToggleTooltips)
+            .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                state: self.state,
+            })));
 
         let mut input_and_buttons = Column::new().spacing(10).width(Length::Fill);
-
         input_and_buttons = input_and_buttons.push(text_for_translation);
 
         if self.tool_tips {
             let button_row = Row::new()
                 .spacing(10)
                 .align_items(Alignment::Center)
-                .push(Button::new("Translate").on_press(Message::Translate))
-                .push(Button::new("Conjugate").on_press(Message::Conjugate))
-                .push(Button::new("Plural").on_press(Message::Plural));
+                .push(Button::new("Translate").on_press(Message::Translate).style(
+                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
+                ))
+                .push(Button::new("Conjugate").on_press(Message::Conjugate).style(
+                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
+                ))
+                .push(Button::new("Plural").on_press(Message::Plural).style(
+                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
+                ))
+                .push(
+                    Button::new(if self.manual_override {
+                        "Theme (Manual)"
+                    } else {
+                        "Theme (Auto)"
+                    })
+                    .on_press(Message::ToggleTheme)
+                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                        state: self.state,
+                    }))),
+                );
 
             input_and_buttons = input_and_buttons.push(button_row);
         }
@@ -157,8 +212,6 @@ impl Application for Scribe {
             .spacing(10)
             .align_items(Alignment::Center)
             .push(top_row);
-
-        let is_dark = self.state.is_dark_theme;
 
         Container::new(layout)
             .width(Length::Fill)

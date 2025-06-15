@@ -1,18 +1,79 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-use iced::{widget::text_input, Background, Border, Color};
-
+use iced::widget::button::Appearance as ButtonAppearance;
 use iced::widget::text_input::Appearance as TextInputAppearance;
+use iced::{widget::button, widget::text_input, Background, Border, Color, Shadow, Vector};
 
 use crate::state::AppState;
 
 pub struct CustomTextInput {
     pub state: AppState,
 }
+pub struct ButtonStyle {
+    pub state: AppState,
+}
+
+impl button::StyleSheet for ButtonStyle {
+    type Style = iced::Theme;
+
+    fn active(&self, style: &Self::Style) -> ButtonAppearance {
+        let is_dark = self.state.is_dark_theme;
+
+        ButtonAppearance {
+            background: Some(Background::Color(if is_dark {
+                Color::from_rgb8(0x3E, 0x95, 0xCC)
+            } else {
+                Color::from_rgb8(0x4C, 0xAD, 0xE6)
+            })),
+            text_color: if is_dark {
+                Color::from_rgb8(0xFF, 0xFF, 0xFF) //rgb(189, 189, 189) - White text for dark mode
+            } else {
+                Color::from_rgb8(0x00, 0x00, 0x00) // #000000 - Black text for light mode
+            },
+            border: Border {
+                color: Color::TRANSPARENT,
+                width: 0.0,
+                radius: 4.0.into(),
+            },
+            shadow: Shadow {
+                color: Color::TRANSPARENT,
+                offset: Vector::new(0.0, 0.0),
+                blur_radius: 0.0,
+            },
+            shadow_offset: Vector::new(0.0, 0.0),
+        }
+    }
+    fn hovered(&self, style: &Self::Style) -> ButtonAppearance {
+        self.active(style) // Same as active - no hover effects
+    }
+
+    fn pressed(&self, style: &Self::Style) -> ButtonAppearance {
+        self.active(style) // Same as active - no press effects
+    }
+
+    fn disabled(&self, _style: &Self::Style) -> ButtonAppearance {
+        ButtonAppearance {
+            background: Some(Background::Color(Color::from_rgb8(0xCC, 0xCC, 0xCC))), // #CCCCCC - Gray for disabled
+            text_color: Color::from_rgb8(0x66, 0x66, 0x66), // #666666 - Darker gray text
+            border: Border {
+                color: Color::TRANSPARENT,
+                width: 0.0,
+                radius: 4.0.into(),
+            },
+            shadow: Shadow {
+                color: Color::TRANSPARENT,
+                offset: Vector::new(0.0, 0.0),
+                blur_radius: 0.0,
+            },
+            shadow_offset: Vector::new(0.0, 0.0),
+        }
+    }
+}
 
 impl text_input::StyleSheet for CustomTextInput {
     type Style = iced::Theme;
 
     fn active(&self, style: &Self::Style) -> TextInputAppearance {
+        println!("Now we are in the style.rs");
         let is_dark = self.state.is_dark_theme;
         TextInputAppearance {
             background: Background::Color(if is_dark {
