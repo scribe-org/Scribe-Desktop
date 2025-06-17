@@ -153,7 +153,7 @@ impl Application for Scribe {
         let logo_data: &[u8] = if is_dark {
             include_bytes!("../../ScribeBtnPad.png")
         } else {
-            include_bytes!("../../ScribeBtnPadBlack.png")
+            include_bytes!("../../ScribeBtnPadBlackLarger.png")
         };
         let logo_handle = Handle::from_memory(logo_data.to_vec());
         let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
