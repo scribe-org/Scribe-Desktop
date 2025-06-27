@@ -107,7 +107,7 @@ impl Application for Scribe {
             Message::Plural => println!("Plural"),
             Message::ToggleTheme => {
                 // Manual theme toggle
-                self.manual_override = !self.manual_override; // Toggle override instead of always setting true
+                self.manual_override = !self.manual_override;
                 self.state.toggle_theme();
                 self.theme = if self.state.is_dark_theme {
                     Theme::Dark
@@ -168,7 +168,9 @@ impl Application for Scribe {
             .on_press(Message::ToggleTooltips)
             .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
                 state: self.state,
-            })));
+            })))
+            .width(Length::Fixed(60.0))
+            .height(Length::Fixed(30.0));
 
         let mut input_and_buttons = Column::new().spacing(10).width(Length::Fill);
         input_and_buttons = input_and_buttons.push(text_for_translation);
@@ -200,11 +202,16 @@ impl Application for Scribe {
 
             input_and_buttons = input_and_buttons.push(button_row);
         }
+        let top_column = Column::new()
+            .spacing(10)
+            .align_items(Alignment::Start)
+            .width(Length::Shrink)
+            .push(toggle_button);
 
         let top_row = Row::new()
             .spacing(10)
-            .align_items(Alignment::Center)
-            .push(toggle_button)
+            .align_items(Alignment::Start)
+            .push(top_column)
             .push(input_and_buttons);
 
         let layout = Column::new()
