@@ -50,9 +50,10 @@ The current WIP Scribe-Desktop UI is:
 
 <div align="center">
   <br>
-  <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_base_view.png"><img height="150" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_base_view.png" alt="Scribe-Desktop base view"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_base_view.png"><img width="500" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_base_view.png" alt="Scribe-Desktop base view"></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_command_selection.png"><img height="150" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_command_selection.png" alt="Scribe-Desktop command selection"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_command_selection.png"><img width="500" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_command_selection.png" alt="Scribe-Desktop command selection"></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <br>
 </div>
 
