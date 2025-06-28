@@ -151,14 +151,14 @@ impl Application for Scribe {
         let is_dark = self.state.is_dark_theme;
 
         let logo_data: &[u8] = if is_dark {
-            include_bytes!("../../ScribeBtnPad.png")
+            include_bytes!("../../icons/ScribeIconWhite.png")
         } else {
-            include_bytes!("../../ScribeBtnPadBlackLarger.png")
+            include_bytes!("../../icons/ScribeIconBlack.png")
         };
         let logo_handle = Handle::from_memory(logo_data.to_vec());
         let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
 
-        let text_for_translation = text_input("Your translation here...", &self.keys.clone())
+        let text_for_translation = text_input("Enter text for command...", &self.keys.clone())
             .font(Font::DEFAULT)
             .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {
                 state: self.state,
