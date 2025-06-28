@@ -5,7 +5,9 @@ use iced::{
     Subscription, Theme,
 };
 use iced_futures::subscription;
+use scribe::styles::ButtonStyle;
 use scribe::styles::CustomTextInput;
+use scribe::AppState;
 use std::io::Read;
 use std::net::TcpListener;
 
@@ -17,6 +19,7 @@ pub enum Message {
     Translate,
     Conjugate,
     Plural,
+    ToggleTheme,
     NoOp,
 }
 
@@ -24,15 +27,36 @@ struct Scribe {
     keys: String,
     is_listening: bool,
     tool_tips: bool,
+    state: AppState,
+    theme: Theme,
+    manual_override: bool,
 }
 
 impl Default for Scribe {
     fn default() -> Self {
+        let detected_theme = detect_system_theme();
+        let is_dark = matches!(detected_theme, Theme::Dark);
+        println!("Initial system theme detected: {:?}", detected_theme);
         Scribe {
             keys: String::new(),
             is_listening: true,
             tool_tips: false,
+            state: AppState {
+                is_dark_theme: is_dark,
+                ..AppState::default()
+            },
+            theme: detected_theme.clone(),
+            manual_override: false,
         }
+    }
+}
+
+fn detect_system_theme() -> Theme {
+    let mode = dark_light::detect();
+    match mode {
+        dark_light::Mode::Dark => Theme::Dark,
+        dark_light::Mode::Light => Theme::Light,
+        dark_light::Mode::Default => Theme::Light,
     }
 }
 
@@ -51,7 +75,7 @@ impl Application for Scribe {
     }
 
     fn theme(&self) -> Self::Theme {
-        Theme::Light
+        self.theme.clone()
     }
 
     fn update(&mut self, message: Message) -> Command<Self::Message> {
@@ -81,7 +105,21 @@ impl Application for Scribe {
             Message::Translate => println!("Translate"),
             Message::Conjugate => println!("Conjugate"),
             Message::Plural => println!("Plural"),
-            Message::NoOp => todo!(),
+            Message::ToggleTheme => {
+                // Manual theme toggle
+                self.manual_override = !self.manual_override;
+                self.state.toggle_theme();
+                self.theme = if self.state.is_dark_theme {
+                    Theme::Dark
+                } else {
+                    Theme::Light
+                };
+                println!(
+                    "Manual theme toggle - override: {}, theme: {:?}",
+                    self.manual_override, self.theme
+                );
+            }
+            Message::NoOp => {}
         }
         Command::none()
     }
@@ -110,38 +148,73 @@ impl Application for Scribe {
     }
 
     fn view(&self) -> Element<Message> {
-        let logo_data: &[u8] = include_bytes!("../../ScribeBtnPad.png");
+        let is_dark = self.state.is_dark_theme;
+
+        let logo_data: &[u8] = if is_dark {
+            include_bytes!("../../icons/ScribeIconWhite.png")
+        } else {
+            include_bytes!("../../icons/ScribeIconBlack.png")
+        };
         let logo_handle = Handle::from_memory(logo_data.to_vec());
         let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
 
-        let text_for_translation = text_input("Your translation here...", &self.keys.clone())
+        let text_for_translation = text_input("Enter text for command...", &self.keys.clone())
             .font(Font::DEFAULT)
-            .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {})));
+            .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {
+                state: self.state,
+            })));
 
-        let toggle_button = Button::new(logo_button).on_press(Message::ToggleTooltips);
+        let toggle_button = Button::new(logo_button)
+            .on_press(Message::ToggleTooltips)
+            .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                state: self.state,
+            })))
+            .width(Length::Fixed(60.0))
+            .height(Length::Fixed(30.0));
 
         let mut input_and_buttons = Column::new().spacing(10).width(Length::Fill);
-
         input_and_buttons = input_and_buttons.push(text_for_translation);
 
         if self.tool_tips {
             let button_row = Row::new()
                 .spacing(10)
                 .align_items(Alignment::Center)
-                .push(Button::new("Translate").on_press(Message::Translate))
-                .push(Button::new("Conjugate").on_press(Message::Conjugate))
-                .push(Button::new("Plural").on_press(Message::Plural));
+                .push(Button::new("Translate").on_press(Message::Translate).style(
+                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
+                ))
+                .push(Button::new("Conjugate").on_press(Message::Conjugate).style(
+                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
+                ))
+                .push(Button::new("Plural").on_press(Message::Plural).style(
+                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
+                ))
+                .push(
+                    Button::new(if self.manual_override {
+                        "Theme (Manual)"
+                    } else {
+                        "Theme (Auto)"
+                    })
+                    .on_press(Message::ToggleTheme)
+                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                        state: self.state,
+                    }))),
+                );
 
             input_and_buttons = input_and_buttons.push(button_row);
         }
+        let top_column = Column::new()
+            .spacing(10)
+            .align_items(Alignment::Start)
+            .width(Length::Shrink)
+            .push(toggle_button);
 
         let top_row = Row::new()
             .spacing(10)
-            .align_items(Alignment::Center)
-            .push(toggle_button)
+            .align_items(Alignment::Start)
+            .push(top_column)
             .push(input_and_buttons);
 
-        let mut layout = Column::new()
+        let layout = Column::new()
             .width(Length::Shrink)
             .spacing(10)
             .align_items(Alignment::Center)
@@ -151,9 +224,17 @@ impl Application for Scribe {
             .width(Length::Fill)
             .height(Length::Shrink)
             .padding(10)
-            .style(|_theme: &Theme| iced::widget::container::Appearance {
-                background: Some(iced::Color::from_rgb8(0x4C, 0xAD, 0xE6).into()), // #4CADE6
-                ..Default::default()
+            .style(move |_theme: &Theme| {
+                let background_color = if is_dark {
+                    iced::Color::from_rgb8(0x1E, 0x1E, 0x1E) // Dark mode background
+                } else {
+                    iced::Color::from_rgb8(0xCE, 0xD2, 0xD9) // Light mode background
+                };
+
+                iced::widget::container::Appearance {
+                    background: Some(background_color.into()),
+                    ..Default::default()
+                }
             })
             .into()
     }

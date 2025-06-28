@@ -37,20 +37,22 @@ Check out Scribe's [architecture diagrams](https://github.com/scribe-org/Organiz
 <!-- - [Setup](#setup)
   - [Base Functionality](#base-functionality) -->
 
-- [Preview](#preview)
+- [Preview Images](#preview-images)
 - [Contributing](#contributing)
 - [Environment Setup](#environment-setup)
 - [Featured By](#featured-by)
 
-<a id="preview"></a>
+<a id="preview-images"></a>
 
-# Preview [`⇧`](#contents)
+# Preview Images [`⇧`](#contents)
 
-The following is a mockup of the planned interface:
+The current WIP Scribe-Desktop UI is:
 
 <div align="center">
   <br>
-  <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_example.png"><img height="350" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_example.png" alt="Scribe-Desktop Preview"></a>
+  <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_base_view.png"><img height="150" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_base_view.png" alt="Scribe-Desktop base view"></a>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/scribe-org/Scribe-Desktop/blob/main/.github/resources/images/scribe_desktop_command_selection.png"><img height="150" src="https://raw.githubusercontent.com/scribe-org/Scribe-Desktop/main/.github/resources/images/scribe_desktop_command_selection.png" alt="Scribe-Desktop command selection"></a>
   <br>
 </div>
 

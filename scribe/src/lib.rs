@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 use rdev::Key;
+pub mod state;
 pub mod styles;
+pub use state::AppState;
 
 pub fn allowed_keys(key: &Key) -> Option<char> {
     match key {
