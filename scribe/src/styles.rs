@@ -16,7 +16,7 @@ impl button::StyleSheet for ButtonStyle {
     type Style = iced::Theme;
 
     fn active(&self, style: &Self::Style) -> ButtonAppearance {
-        let is_dark = self.state.is_dark_theme;
+        let is_dark = matches!(style, iced::Theme::Dark);
 
         ButtonAppearance {
             background: Some(Background::Color(if is_dark {
@@ -74,7 +74,7 @@ impl text_input::StyleSheet for CustomTextInput {
 
     fn active(&self, style: &Self::Style) -> TextInputAppearance {
         println!("Now we are in the style.rs");
-        let is_dark = self.state.is_dark_theme;
+        let is_dark = matches!(style, iced::Theme::Dark);
         TextInputAppearance {
             background: Background::Color(if is_dark {
                 Color::from_rgb8(0xFF, 0xFF, 0xFF)
