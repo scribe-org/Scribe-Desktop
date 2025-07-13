@@ -65,7 +65,7 @@ The current WIP Scribe-Desktop UI is:
   <img src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/logos/MatrixLogoGrey.png" width="175" alt="Public Matrix Chat" align="right">
 </a>
 
-Scribe uses [Matrix](https://matrix.org/) for communications. You're more than welcome to [join us in our public chat rooms](https://matrix.to/#/#scribe_community:matrix.org) to share ideas, ask questions or just say hi :)
+Scribe uses [Matrix](https://matrix.org/) for communications. You're more than welcome to [join us in our public chat rooms](https://matrix.to/#/#scribe_community:matrix.org) to share ideas, ask questions or just say hi :) We'd suggest that you use the [Element](https://element.io/) client and [Element X](https://element.io/app) for a mobile app.
 
 Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-Desktop/blob/main/CONTRIBUTING.md) if you are interested in contributing to Scribe-Desktop. Work that is in progress or could be implemented is tracked in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues) and [projects](https://github.com/scribe-org/Scribe-Desktop/projects).
 
