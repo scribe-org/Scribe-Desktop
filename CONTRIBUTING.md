@@ -151,11 +151,11 @@ pre-commit install
 ```bash
 cd scribe
 cargo build
-cargo run --bin scribe
+cargo run
 ```
 
 6. You may need to give your terminal or IDE permission for your keyboard strokes to be read
-   - You may also need to restart the application and then run `cargo run --bin scribe` again
+   - You may also need to restart the application and then run `cargo run` again
 
 > [!NOTE]
 > Feel free to contact the team in the [Desktop room on Matrix](https://matrix.to/#/#ScribeDesktop:matrix.org) if you're having problems getting your environment setup!
