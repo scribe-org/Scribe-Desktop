@@ -73,13 +73,12 @@ impl text_input::StyleSheet for CustomTextInput {
     type Style = iced::Theme;
 
     fn active(&self, style: &Self::Style) -> TextInputAppearance {
-        println!("Now we are in the style.rs");
         let is_dark = matches!(style, iced::Theme::Dark);
         TextInputAppearance {
             background: Background::Color(if is_dark {
-                Color::from_rgb8(0xFF, 0xFF, 0xFF)
+                Color::from_rgb8(0x30, 0x30, 0x30)
             } else {
-                Color::from_rgb8(0x00, 0x00, 0x00)
+                Color::from_rgb8(0xFF, 0xFF, 0xFF)
             }),
             border: Border {
                 color: if is_dark {
