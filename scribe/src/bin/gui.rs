@@ -106,7 +106,6 @@ impl Application for Scribe {
             Message::Conjugate => println!("Conjugate"),
             Message::Plural => println!("Plural"),
             Message::ToggleTheme => {
-                // Manual theme toggle
                 self.manual_override = !self.manual_override;
                 self.state.toggle_theme();
                 self.theme = if self.state.is_dark_theme {
@@ -155,16 +154,16 @@ impl Application for Scribe {
         } else {
             include_bytes!("../../icons/ScribeIconBlack.png")
         };
-        let logo_handle = Handle::from_memory(logo_data.to_vec());
-        let logo_button: Image<Handle> = Image::new(logo_handle.clone()).width(50);
 
-        let text_for_translation = text_input("Enter text for command...", &self.keys.clone())
+        let logo: Image<Handle> = Image::new(Handle::from_memory(logo_data.to_vec())).width(50);
+
+        let text_for_translation = text_input("Enter text for command...", &self.keys)
             .font(Font::DEFAULT)
             .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {
                 state: self.state,
             })));
 
-        let toggle_button = Button::new(logo_button)
+        let toggle_button = Button::new(logo)
             .on_press(Message::ToggleTooltips)
             .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
                 state: self.state,
@@ -202,6 +201,7 @@ impl Application for Scribe {
 
             input_and_buttons = input_and_buttons.push(button_row);
         }
+
         let top_column = Column::new()
             .spacing(10)
             .align_items(Alignment::Start)
@@ -222,7 +222,7 @@ impl Application for Scribe {
 
         Container::new(layout)
             .width(Length::Fill)
-            .height(Length::Shrink)
+            .height(Length::Fill)
             .padding(10)
             .style(move |_theme: &Theme| {
                 let background_color = if is_dark {
@@ -245,7 +245,7 @@ fn main() -> Result<(), iced::Error> {
         window: window::Settings {
             min_size: Some(Size {
                 width: 400.0,
-                height: 50.0,
+                height: 55.0,
             }),
             size: Size {
                 width: 400.0,
