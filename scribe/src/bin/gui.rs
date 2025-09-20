@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-use iced::widget::{image::Handle, text_input, Button, Column, Container, Image, Row};
+use iced::widget::{image::Handle, text_input, Button, Column, Container, Image, Row, Text};
 use iced::{
     executor, window, Alignment, Application, Command, Element, Font, Length, Settings, Size,
     Subscription, Theme,
@@ -97,7 +97,7 @@ impl Application for Scribe {
                 return window::resize(
                     window::Id::MAIN,
                     Size {
-                        width: 400.0,
+                        width: 440.0,
                         height,
                     },
                 );
@@ -148,6 +148,7 @@ impl Application for Scribe {
 
     fn view(&self) -> Element<Message> {
         let is_dark = self.state.is_dark_theme;
+        let button_width = Length::Fixed(80.0);
 
         let logo_data: &[u8] = if is_dark {
             include_bytes!("../../icons/ScribeIconWhite.png")
@@ -178,25 +179,52 @@ impl Application for Scribe {
             let button_row = Row::new()
                 .spacing(10)
                 .align_items(Alignment::Center)
-                .push(Button::new("Translate").on_press(Message::Translate).style(
-                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
-                ))
-                .push(Button::new("Conjugate").on_press(Message::Conjugate).style(
-                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
-                ))
-                .push(Button::new("Plural").on_press(Message::Plural).style(
-                    iced::theme::Button::Custom(Box::new(ButtonStyle { state: self.state })),
-                ))
+                .width(Length::Fill)
                 .push(
-                    Button::new(if self.manual_override {
-                        "Theme (Manual)"
-                    } else {
-                        "Theme (Auto)"
-                    })
+                    Button::new(
+                        Container::new("Translate").width(Length::Fill).center_x(), // or .align_x(iced::Alignment::Center)
+                    )
+                    .on_press(Message::Translate)
+                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                        state: self.state,
+                    })))
+                    .width(button_width),
+                )
+                .push(
+                    Button::new(
+                        Container::new("Conjugate").width(Length::Fill).center_x(), // or .align_x(iced::Alignment::Center)
+                    )
+                    .on_press(Message::Conjugate)
+                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                        state: self.state,
+                    })))
+                    .width(button_width),
+                )
+                .push(
+                    Button::new(
+                        Container::new("Plural").width(Length::Fill).center_x(), // or .align_x(iced::Alignment::Center)
+                    )
+                    .on_press(Message::Plural)
+                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                        state: self.state,
+                    })))
+                    .width(button_width),
+                )
+                .push(
+                    Button::new(
+                        Container::new(if self.manual_override {
+                            "Theme (Manual)"
+                        } else {
+                            "Theme (Auto)"
+                        })
+                        .width(Length::Fill)
+                        .center_x(),
+                    )
                     .on_press(Message::ToggleTheme)
                     .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
                         state: self.state,
-                    }))),
+                    })))
+                    .width(button_width),
                 );
 
             input_and_buttons = input_and_buttons.push(button_row);
