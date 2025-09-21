@@ -181,34 +181,28 @@ impl Application for Scribe {
                 .align_items(Alignment::Center)
                 .width(Length::Fill)
                 .push(
-                    Button::new(
-                        Container::new("Translate").width(Length::Fill).center_x(), // or .align_x(iced::Alignment::Center)
-                    )
-                    .on_press(Message::Translate)
-                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
-                        state: self.state,
-                    })))
-                    .width(button_width),
+                    Button::new(Container::new("Translate").width(Length::Fill).center_x())
+                        .on_press(Message::Translate)
+                        .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                            state: self.state,
+                        })))
+                        .width(button_width),
                 )
                 .push(
-                    Button::new(
-                        Container::new("Conjugate").width(Length::Fill).center_x(), // or .align_x(iced::Alignment::Center)
-                    )
-                    .on_press(Message::Conjugate)
-                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
-                        state: self.state,
-                    })))
-                    .width(button_width),
+                    Button::new(Container::new("Conjugate").width(Length::Fill).center_x())
+                        .on_press(Message::Conjugate)
+                        .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                            state: self.state,
+                        })))
+                        .width(button_width),
                 )
                 .push(
-                    Button::new(
-                        Container::new("Plural").width(Length::Fill).center_x(), // or .align_x(iced::Alignment::Center)
-                    )
-                    .on_press(Message::Plural)
-                    .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
-                        state: self.state,
-                    })))
-                    .width(button_width),
+                    Button::new(Container::new("Plural").width(Length::Fill).center_x())
+                        .on_press(Message::Plural)
+                        .style(iced::theme::Button::Custom(Box::new(ButtonStyle {
+                            state: self.state,
+                        })))
+                        .width(button_width),
                 )
                 .push(
                     Button::new(
