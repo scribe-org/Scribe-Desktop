@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-use iced::widget::{image::Handle, text_input, Button, Column, Container, Image, Row, Text};
+use iced::widget::{image::Handle, text_input, Button, Column, Container, Image, Row};
 use iced::{
     executor, window, Alignment, Application, Command, Element, Font, Length, Settings, Size,
     Subscription, Theme,
