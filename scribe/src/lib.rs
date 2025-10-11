@@ -55,6 +55,7 @@ pub fn allowed_keys(key: &Key) -> Option<char> {
         Key::BackQuote => Some('`'),
         Key::Tab => Some('\t'),
         Key::Quote => Some('"'),
+        Key::Dot => Some('.'),
         _ => None,
     }
 }
