@@ -14,7 +14,6 @@ use std::net::TcpListener;
 #[derive(Debug, Clone)]
 pub enum Message {
     KeyReceived(char),
-    ToggleListening,
     ToggleTooltips,
     Translate,
     Conjugate,
@@ -25,7 +24,7 @@ pub enum Message {
 
 struct Scribe {
     keys: String,
-    is_listening: bool,
+    is_executing_command: bool,
     tool_tips: bool,
     state: AppState,
     theme: Theme,
@@ -39,7 +38,7 @@ impl Default for Scribe {
         println!("Initial system theme detected: {:?}", detected_theme);
         Scribe {
             keys: String::new(),
-            is_listening: true,
+            is_executing_command: false,
             tool_tips: false,
             state: AppState {
                 is_dark_theme: is_dark,
@@ -81,7 +80,7 @@ impl Application for Scribe {
     fn update(&mut self, message: Message) -> Command<Self::Message> {
         match message {
             Message::KeyReceived(char) => {
-                if self.is_listening {
+                if self.is_executing_command {
                     let keys = &mut self.keys;
                     if char == '\x08' {
                         keys.pop();
@@ -90,8 +89,8 @@ impl Application for Scribe {
                     }
                 }
             }
-            Message::ToggleListening => self.is_listening = !self.is_listening,
             Message::ToggleTooltips => {
+                self.is_executing_command = false;
                 self.tool_tips = !self.tool_tips;
                 let height = if self.tool_tips { 92.0 } else { 50.0 };
                 return window::resize(
@@ -102,9 +101,18 @@ impl Application for Scribe {
                     },
                 );
             }
-            Message::Translate => println!("Translate"),
-            Message::Conjugate => println!("Conjugate"),
-            Message::Plural => println!("Plural"),
+            Message::Translate => {
+                self.is_executing_command = true;
+                println!("Translate");
+            }
+            Message::Conjugate => {
+                self.is_executing_command = true;
+                println!("Conjugate");
+            }
+            Message::Plural => {
+                self.is_executing_command = true;
+                println!("Plural");
+            }
             Message::ToggleTheme => {
                 self.manual_override = !self.manual_override;
                 self.state.toggle_theme();
