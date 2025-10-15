@@ -87,6 +87,7 @@ impl Application for Scribe {
             }
             Message::ToggleMenu => {
                 self.show_menu = !self.show_menu;
+                self.is_executing_command = !self.is_executing_command;
                 let new_height = if self.show_menu { 94.0 } else { 52.0 };
                 return window::resize(self.window_id, Size::new(626.0, new_height));
             }
