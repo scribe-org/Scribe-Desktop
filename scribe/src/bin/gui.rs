@@ -28,6 +28,7 @@ struct Scribe {
     show_menu: bool,
     state: AppState,
     theme: Theme,
+    window_id: window::Id,
 }
 
 impl Default for Scribe {
@@ -43,6 +44,7 @@ impl Default for Scribe {
                 ..AppState::default()
             },
             theme: detected_theme,
+            window_id: window::Id::MAIN,
         }
     }
 }
@@ -85,6 +87,8 @@ impl Application for Scribe {
             }
             Message::ToggleMenu => {
                 self.show_menu = !self.show_menu;
+                let new_height = if self.show_menu { 94.0 } else { 52.0 };
+                return window::resize(self.window_id, Size::new(626.0, new_height));
             }
             Message::Settings => {
                 println!("Settings clicked");
@@ -204,7 +208,7 @@ impl Application for Scribe {
             .push(self.create_command_button(conjugate_icon, "Conjugate", Message::Conjugate, button_width))
             .push(self.create_command_button(plural_icon, "Plural", Message::Plural, button_width))
             .push(
-                Button::new(Container::new("Theme").center_x())
+                Button::new(Container::new("Theme"))
                     .on_press(Message::ToggleTheme)
                     .style(iced::theme::Button::Custom(Box::new(
                         CommandButtonStyle {
@@ -216,11 +220,15 @@ impl Application for Scribe {
             );
 
         // Right column with input and buttons
-        let right_column = Column::new()
+        let mut right_column = Column::new()
             .spacing(10)
             .width(Length::Fill)
-            .push(text_input)
-            .push(button_row);
+            .push(text_input);
+
+        // Only show buttons when menu is open
+        if self.show_menu {
+            right_column = right_column.push(button_row);
+        }
 
         // Main layout
         let layout = Column::new()
@@ -270,11 +278,10 @@ impl Scribe {
     fn create_command_button<'a>(&self, icon: Image<Handle>, label: &'a str, message: Message, width: Length) -> Button<'a, Message> {
         let content = Row::new()
             .spacing(5)
-            .align_items(Alignment::Start)
             .push(icon)
             .push(label);
 
-        Button::new(Container::new(content).center_x())
+        Button::new(Container::new(content))
             .on_press(message)
             .style(iced::theme::Button::Custom(Box::new(
                 CommandButtonStyle {
@@ -348,8 +355,8 @@ impl button::StyleSheet for CommandButtonStyle {
 fn main() -> Result<(), iced::Error> {
     Scribe::run(Settings {
         window: window::Settings {
-            min_size: Some(Size::new(626.0, 96.0)),
-            size: Size::new(626.0, 96.0),
+            min_size: Some(Size::new(626.0, 52.0)),
+            size: Size::new(626.0, 52.0),
             position: window::Position::Centered,
             resizable: false,
             decorations: true,
