@@ -25,7 +25,7 @@ impl button::StyleSheet for ButtonStyle {
                 Color::from_rgb8(0x4C, 0xAD, 0xE6)
             })),
             text_color: if is_dark {
-                Color::from_rgb8(0xFF, 0xFF, 0xFF) //rgb(189, 189, 189) - White text for dark mode
+                Color::from_rgb8(0xFF, 0xFF, 0xFF) // rgb(189, 189, 189) - White text for dark mode
             } else {
                 Color::from_rgb8(0x00, 0x00, 0x00) // #000000 - Black text for light mode
             },
@@ -43,17 +43,17 @@ impl button::StyleSheet for ButtonStyle {
         }
     }
     fn hovered(&self, style: &Self::Style) -> ButtonAppearance {
-        self.active(style) // Same as active - no hover effects
+        self.active(style) // same as active - no hover effects
     }
 
     fn pressed(&self, style: &Self::Style) -> ButtonAppearance {
-        self.active(style) // Same as active - no press effects
+        self.active(style) // same as active - no press effects
     }
 
     fn disabled(&self, _style: &Self::Style) -> ButtonAppearance {
         ButtonAppearance {
-            background: Some(Background::Color(Color::from_rgb8(0xCC, 0xCC, 0xCC))), // #CCCCCC - Gray for disabled
-            text_color: Color::from_rgb8(0x66, 0x66, 0x66), // #666666 - Darker gray text
+            background: Some(Background::Color(Color::from_rgb8(0xCC, 0xCC, 0xCC))), // #CCCCCC - gray for disabled
+            text_color: Color::from_rgb8(0x66, 0x66, 0x66), // #666666 - darker gray text
             border: Border {
                 color: Color::TRANSPARENT,
                 width: 0.0,

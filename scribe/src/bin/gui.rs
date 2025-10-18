@@ -142,12 +142,19 @@ impl Application for Scribe {
     fn view(&self) -> Element<'_, Message> {
         let is_dark = self.state.is_dark_theme;
         const ICON_SIZE: u16 = 25;
-        const LOGO_ICON_SIZE: u16 = 20;
+        const SCRIBE_ICON_SIZE: u16 = 20;
         const BUTTON_ICON_SIZE: u16 = 22;
 
-        // Load theme-appropriate icons
-        let (scribe_logo_data, close_icon_data, settings_icon_data, translate_icon_data,
-             conjugate_icon_data, plural_icon_data) = if is_dark {
+        // MARK: Icons
+
+        let (
+            scribe_logo_data,
+            close_icon_data,
+            settings_icon_data,
+            translate_icon_data,
+            conjugate_icon_data,
+            plural_icon_data,
+        ) = if is_dark {
             (
                 include_bytes!("../../icons/ScribeIconWhite.png").as_slice(),
                 include_bytes!("../../icons/CloseIconWhite.png").as_slice(),
@@ -167,10 +174,8 @@ impl Application for Scribe {
             )
         };
 
-        // Create icon images
-        let create_icon = |data: &[u8], width: u16| {
-            Image::new(Handle::from_memory(data.to_vec())).width(width)
-        };
+        let create_icon =
+            |data: &[u8], width: u16| Image::new(Handle::from_memory(data.to_vec())).width(width);
 
         let scribe_logo = create_icon(scribe_logo_data, ICON_SIZE);
         let close_icon = create_icon(close_icon_data, ICON_SIZE);
@@ -179,14 +184,15 @@ impl Application for Scribe {
         let conjugate_icon = create_icon(conjugate_icon_data, BUTTON_ICON_SIZE);
         let plural_icon = create_icon(plural_icon_data, BUTTON_ICON_SIZE);
 
-        // Text input
+        // MARK: Text Input
+
         let text_input = text_input("Enter text for command...", &self.keys)
             .font(Font::DEFAULT)
             .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {
                 state: self.state,
             })));
 
-        // Left column with logo/menu buttons
+        // Left column with logo/menu buttons.
         let left_column = if self.show_menu {
             Column::new()
                 .spacing(10)
@@ -197,41 +203,56 @@ impl Application for Scribe {
             Column::new()
                 .spacing(10)
                 .align_items(Alignment::Center)
-                .push(self.create_icon_button(scribe_logo, Message::ToggleMenu, LOGO_ICON_SIZE, false))
+                .push(self.create_icon_button(
+                    scribe_logo,
+                    Message::ToggleMenu,
+                    SCRIBE_ICON_SIZE,
+                    false,
+                ))
         };
 
-        // Command buttons
+        // MARK: Command Buttons
+
         let button_width = Length::Fixed(130.0);
         let button_row = Row::new()
             .spacing(10)
             .align_items(Alignment::Start)
-            .push(self.create_command_button(translate_icon, "Translate", Message::Translate, button_width))
-            .push(self.create_command_button(conjugate_icon, "Conjugate", Message::Conjugate, button_width))
+            .push(self.create_command_button(
+                translate_icon,
+                "Translate",
+                Message::Translate,
+                button_width,
+            ))
+            .push(self.create_command_button(
+                conjugate_icon,
+                "Conjugate",
+                Message::Conjugate,
+                button_width,
+            ))
             .push(self.create_command_button(plural_icon, "Plural", Message::Plural, button_width))
             .push(
                 Button::new(Container::new("Theme"))
                     .on_press(Message::ToggleTheme)
-                    .style(iced::theme::Button::Custom(Box::new(
-                        CommandButtonStyle {
-                            state: self.state,
-                            is_settings: false,
-                        },
-                    )))
+                    .style(iced::theme::Button::Custom(Box::new(CommandButtonStyle {
+                        state: self.state,
+                        is_settings: false,
+                    })))
                     .width(button_width),
             );
 
-        // Right column with input and buttons
+        // Right column with input and buttons.
         let mut right_column = Column::new()
             .spacing(10)
             .width(Length::Fill)
             .push(text_input);
 
-        // Only show buttons when menu is open
+        // Only show buttons when menu is open.
         if self.show_menu {
             right_column = right_column.push(button_row);
         }
 
-        // Main layout
+        // MARK: Main Layout
+
         let layout = Column::new()
             .width(Length::Shrink)
             .spacing(10)
@@ -263,33 +284,42 @@ impl Application for Scribe {
 }
 
 impl Scribe {
-    fn create_icon_button<'a>(&self, icon: Image<Handle>, message: Message, icon_size: u16, is_settings: bool) -> Button<'a, Message> {
+    fn create_icon_button<'a>(
+        &self,
+        icon: Image<Handle>,
+        message: Message,
+        icon_size: u16,
+        is_settings: bool,
+    ) -> Button<'a, Message> {
         Button::new(icon)
             .on_press(message)
-            .style(iced::theme::Button::Custom(Box::new(
-                CommandButtonStyle {
-                    state: self.state,
-                    is_settings,
-                },
-            )))
-            .width(Length::Fixed(icon_size as f32 + if icon_size == 20 { 36.0 } else { 30.0 }))
-            .height(Length::Fixed(icon_size as f32 + if icon_size == 20 { 10.0 } else { 6.0 }))
+            .style(iced::theme::Button::Custom(Box::new(CommandButtonStyle {
+                state: self.state,
+                is_settings,
+            })))
+            .width(Length::Fixed(
+                icon_size as f32 + if icon_size == 20 { 36.0 } else { 30.0 },
+            ))
+            .height(Length::Fixed(
+                icon_size as f32 + if icon_size == 20 { 10.0 } else { 6.0 },
+            ))
     }
 
-    fn create_command_button<'a>(&self, icon: Image<Handle>, label: &'a str, message: Message, width: Length) -> Button<'a, Message> {
-        let content = Row::new()
-            .spacing(5)
-            .push(icon)
-            .push(label);
+    fn create_command_button<'a>(
+        &self,
+        icon: Image<Handle>,
+        label: &'a str,
+        message: Message,
+        width: Length,
+    ) -> Button<'a, Message> {
+        let content = Row::new().spacing(5).push(icon).push(label);
 
         Button::new(Container::new(content))
             .on_press(message)
-            .style(iced::theme::Button::Custom(Box::new(
-                CommandButtonStyle {
-                    state: self.state,
-                    is_settings: false,
-                },
-            )))
+            .style(iced::theme::Button::Custom(Box::new(CommandButtonStyle {
+                state: self.state,
+                is_settings: false,
+            })))
             .width(width)
     }
 }
@@ -340,7 +370,9 @@ impl button::StyleSheet for CommandButtonStyle {
 
     fn disabled(&self, _style: &Self::Style) -> button::Appearance {
         button::Appearance {
-            background: Some(iced::Background::Color(iced::Color::from_rgb8(0xCC, 0xCC, 0xCC))),
+            background: Some(iced::Background::Color(iced::Color::from_rgb8(
+                0xCC, 0xCC, 0xCC,
+            ))),
             text_color: iced::Color::from_rgb8(0x66, 0x66, 0x66),
             border: iced::Border {
                 color: iced::Color::TRANSPARENT,
