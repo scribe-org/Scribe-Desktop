@@ -5,6 +5,7 @@ use iced::{
     Subscription, Theme,
 };
 use iced_futures::subscription;
+
 use scribe::styles::CustomTextInput;
 use scribe::AppState;
 use std::io::Read;
@@ -22,6 +23,103 @@ pub enum Message {
     NoOp,
 }
 
+struct DarkTextInputStyle;
+struct LightTextInputStyle;
+
+impl text_input::StyleSheet for DarkTextInputStyle {
+    type Style = Theme;
+
+    fn active(&self, _style: &Self::Style) -> text_input::Appearance {
+        text_input::Appearance {
+            background: iced::Background::Color(iced::Color::from_rgb8(0x00, 0x00, 0x00)),
+            border: iced::Border {
+                color: iced::Color::from_rgb(0.7, 0.7, 0.7),
+                width: 1.0,
+                radius: 4.0.into(),
+            },
+            icon_color: iced::Color::WHITE,
+        }
+    }
+
+    fn focused(&self, style: &Self::Style) -> text_input::Appearance {
+        self.active(style)
+    }
+
+    fn hovered(&self, style: &Self::Style) -> text_input::Appearance {
+        self.active(style)
+    }
+
+    fn disabled(&self, style: &Self::Style) -> text_input::Appearance {
+        self.active(style)
+    }
+
+    fn value_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::WHITE
+    }
+
+    fn disabled_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::from_rgb(0.5, 0.5, 0.5)
+    }
+
+    fn selection_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::from_rgb(0.3, 0.4, 0.6)
+    }
+
+    fn placeholder_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::from_rgb(0.6, 0.6, 0.6)
+    }
+}
+
+impl text_input::StyleSheet for LightTextInputStyle {
+    type Style = Theme;
+
+    fn active(&self, _style: &Self::Style) -> text_input::Appearance {
+        text_input::Appearance {
+            background: iced::Background::Color(iced::Color::from_rgb8(0xFF, 0xFF, 0xFF)),
+            border: iced::Border {
+                color: iced::Color::from_rgb(0.7, 0.7, 0.7),
+                width: 1.0,
+                radius: 4.0.into(),
+            },
+            icon_color: iced::Color::BLACK,
+        }
+    }
+
+    fn focused(&self, style: &Self::Style) -> text_input::Appearance {
+        self.active(style)
+    }
+
+    fn hovered(&self, style: &Self::Style) -> text_input::Appearance {
+        self.active(style)
+    }
+
+    fn disabled(&self, style: &Self::Style) -> text_input::Appearance {
+        self.active(style)
+    }
+
+    fn value_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::BLACK
+    }
+
+    fn disabled_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::from_rgb(0.7, 0.7, 0.7)
+    }
+
+    fn selection_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::from_rgb(0.7, 0.8, 1.0)
+    }
+
+    fn placeholder_color(&self, _style: &Self::Style) -> iced::Color {
+        iced::Color::from_rgb(0.7, 0.7, 0.7)
+    }
+}
+
+fn detect_system_theme() -> Theme {
+    match dark_light::detect() {
+        dark_light::Mode::Dark => Theme::Dark,
+        _ => Theme::Light,
+    }
+}
 struct Scribe {
     keys: String,
     is_executing_command: bool,
@@ -46,13 +144,6 @@ impl Default for Scribe {
             theme: detected_theme,
             window_id: window::Id::MAIN,
         }
-    }
-}
-
-fn detect_system_theme() -> Theme {
-    match dark_light::detect() {
-        dark_light::Mode::Dark => Theme::Dark,
-        _ => Theme::Light,
     }
 }
 
@@ -108,10 +199,31 @@ impl Application for Scribe {
             }
             Message::ToggleTheme => {
                 self.state.toggle_theme();
+                println!("Theme toggled! is_dark_theme: {}", self.state.is_dark_theme);
+
+                // Update self.theme to the custom theme
                 self.theme = if self.state.is_dark_theme {
-                    Theme::Dark
+                    Theme::custom(
+                        "Dark Custom".to_string(),
+                        iced::theme::Palette {
+                            background: iced::Color::from_rgb8(0x1E, 0x1E, 0x1E),
+                            text: iced::Color::WHITE,
+                            primary: iced::Color::from_rgb8(0x3E, 0x95, 0xCC),
+                            success: iced::Color::from_rgb8(0x12, 0x66, 0x4f),
+                            danger: iced::Color::from_rgb8(0xc3, 0x42, 0x3f),
+                        },
+                    )
                 } else {
-                    Theme::Light
+                    Theme::custom(
+                        "Light Custom".to_string(),
+                        iced::theme::Palette {
+                            background: iced::Color::from_rgb8(0xCE, 0xD2, 0xD9),
+                            text: iced::Color::BLACK,
+                            primary: iced::Color::from_rgb8(0x4C, 0xAD, 0xE6),
+                            success: iced::Color::from_rgb8(0x12, 0x66, 0x4f),
+                            danger: iced::Color::from_rgb8(0xc3, 0x42, 0x3f),
+                        },
+                    )
                 };
             }
             Message::NoOp => {}
@@ -140,6 +252,10 @@ impl Application for Scribe {
     }
 
     fn view(&self) -> Element<'_, Message> {
+        println!(
+            "view() called, is_dark_theme: {}, theme: {:?}",
+            self.state.is_dark_theme, self.theme
+        );
         let is_dark = self.state.is_dark_theme;
         const ICON_SIZE: u16 = 25;
         const SCRIBE_ICON_SIZE: u16 = 20;
@@ -185,12 +301,15 @@ impl Application for Scribe {
         let plural_icon = create_icon(plural_icon_data, BUTTON_ICON_SIZE);
 
         // MARK: Text Input
+        use iced::{Background, Border, Color};
 
         let text_input = text_input("Enter text for command...", &self.keys)
             .font(Font::DEFAULT)
-            .style(iced::theme::TextInput::Custom(Box::new(CustomTextInput {
-                state: self.state,
-            })));
+            .style(if is_dark {
+                iced::theme::TextInput::Custom(Box::new(DarkTextInputStyle))
+            } else {
+                iced::theme::TextInput::Custom(Box::new(LightTextInputStyle))
+            });
 
         // Left column with logo/menu buttons.
         let left_column = if self.show_menu {
