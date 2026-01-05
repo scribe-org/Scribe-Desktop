@@ -25,7 +25,9 @@ impl button::StyleSheet for ButtonStyle {
                 Color::from_rgb8(0x4C, 0xAD, 0xE6)
             })),
             text_color: if is_dark {
+                Color::from_rgb8(0xFF, 0xFF, 0xFF)
             } else {
+                Color::from_rgb8(0x00, 0x00, 0x00)
             },
             border: Border {
                 color: Color::TRANSPARENT,
@@ -41,13 +43,17 @@ impl button::StyleSheet for ButtonStyle {
         }
     }
     fn hovered(&self, style: &Self::Style) -> ButtonAppearance {
+        self.active(style)
     }
 
     fn pressed(&self, style: &Self::Style) -> ButtonAppearance {
+        self.active(style)
     }
 
     fn disabled(&self, _style: &Self::Style) -> ButtonAppearance {
         ButtonAppearance {
+            background: Some(Background::Color(Color::from_rgb8(0xCC, 0xCC, 0xCC))),
+            text_color: Color::from_rgb8(0x66, 0x66, 0x66),
             border: Border {
                 color: Color::TRANSPARENT,
                 width: 0.0,
