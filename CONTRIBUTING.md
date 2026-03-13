@@ -138,12 +138,13 @@ rustc --version
 cargo --version
 ```
 
-4. (Suggested) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
+4. (Suggested) Install [prek](https://prek.j178.dev/) pre-commit hooks to check for and correct common errors in commits:
 
 ```bash
-pip install pre-commit
-pre-commit install
-# pre-commit run --all-files
+pip install --upgrade pip  # make sure that pip is at the latest version
+pip install prek
+prek install
+# prek --all-files
 ```
 
 5. Run the following to spin up a local copy of the Scribe-Desktop GUI:
