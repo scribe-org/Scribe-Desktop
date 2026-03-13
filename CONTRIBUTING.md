@@ -1,3 +1,5 @@
+<a id="top"></a>
+
 # Contributing to Scribe-Desktop
 
 Thank you for your interest in contributing!
@@ -8,14 +10,12 @@ Following these guidelines helps to communicate that you respect the time of the
 
 If you have questions or would like to communicate with the team, please [join us in our public Matrix chat rooms](https://matrix.to/#/#scribe_community:matrix.org). We'd be happy to hear from you!
 
-<a id="contents"></a>
+# Contents
 
-# **Contents**
-
-- [First steps as a contributor](#first-steps)
-- [Learning the tech stack](#learning-the-tech-)
-- [Development environment](#dev-env)
-- [Issues and projects](#issues-projects)
+- [First steps as a contributor](#first-steps-as-a-contributor)
+- [Learning the tech stack](#learning-the-tech-stack)
+- [Development environment](#development-environment)
+- [Issues and projects](#issues-and-projects)
 - [Bug reports](#bug-reports)
 - [Feature requests](#feature-requests)
 - [Pull requests](#pull-requests)
@@ -24,9 +24,7 @@ If you have questions or would like to communicate with the team, please [join u
 - [Documentation](#documentation)
 - [Design](#design)
 
-<a id="first-steps"></a>
-
-## First steps as a contributor [`⇧`](#contents)
+## First steps as a contributor
 
 Thank you for your interest in contributing to Scribe-Desktop! We look forward to welcoming you to the community and working with you to build an tools for language learners to communicate effectively :) The following are some suggested steps for people interested in joining our community:
 
@@ -40,9 +38,9 @@ Thank you for your interest in contributing to Scribe-Desktop! We look forward t
 - Check out our [public designs on Figma](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?type=design&node-id=405-464&mode=design&t=E3ccS9Z8MDVSizQ4-0) to understand Scribes's goals and direction
 - Consider joining our [bi-weekly developer sync](https://etherpad.wikimedia.org/p/scribe-dev-sync)!
 
-<a id="learning-the-tech-"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-## Learning the tech stack [`⇧`](#contents)
+## Learning the tech stack
 
 Scribe-Desktop is very open to contributions from people in the early stages of their coding journey! The following is a select list of documentation pages to help you understand the technologies we use.
 
@@ -59,9 +57,9 @@ As Scribe-Desktop is written in [Rust](https://www.rust-lang.org/), we'd suggest
 </p>
 </details>
 
-<a id="dev-env"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Development environment [`⇧`](#contents)
+# Development environment
 
 1. First and foremost, please see the suggested IDE setup in the dropdown below to make sure that your editor is ready for development.
 
@@ -161,9 +159,9 @@ cargo run
 > [!NOTE]
 > Feel free to contact the team in the [Desktop room on Matrix](https://matrix.to/#/#ScribeDesktop:matrix.org) if you're having problems getting your environment setup!
 
-<a id="issues-projects"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Issues and projects [`⇧`](#contents)
+# Issues and projects
 
 The [issue tracker for Scribe-Desktop](https://github.com/scribe-org/Scribe-Desktop/issues) is the preferred channel for [bug reports](#bug-reports), [features requests](#feature-requests) and [submitting pull requests](#pull-requests). Scribe also organizes related issues into [projects](https://github.com/scribe-org/Scribe-Desktop/projects).
 
@@ -172,9 +170,9 @@ The [issue tracker for Scribe-Desktop](https://github.com/scribe-org/Scribe-Desk
 
 Be sure to check the [`-next release-`](https://github.com/scribe-org/Scribe-Desktop/labels/-next%20release-) and [`-priority-`](https://github.com/scribe-org/Scribe-Desktop/labels/-priority-) labels in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues) for those that are most important, as well as those marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are tailored for first-time contributors.
 
-<a id="bug-reports"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Bug reports [`⇧`](#contents)
+# Bug reports
 
 A bug is a _demonstrable problem_ that is caused by the code in the repository. Good bug reports are extremely helpful - thank you!
 
@@ -198,15 +196,15 @@ To make the above steps easier, the Scribe team asks that contributors report bu
 
 Again, thank you for your time in reporting issues!
 
-<a id="feature-requests"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Feature requests [`⇧`](#contents)
+# Feature requests
 
 Feature requests are more than welcome! Please take a moment to find out whether your idea fits with the scope and aims of the project. When making a suggestion, provide as much detail and context as possible, and further make clear the degree to which you would like to contribute in its development. Feature requests are marked with the [`Feature`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue%20state%3Aopen%20type%3AFeature) type, and can be made using the [feature request](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=feature&template=feature_request.yml) template.
 
-<a id="pull-requests"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Pull requests [`⇧`](#contents)
+# Pull requests
 
 Good pull requests - patches, improvements and new features - are the foundation of our community making Scribe-Desktop. They should remain focused in scope and avoid containing unrelated commits. Note that all contributions to this project will be made under [the specified license](https://github.com/scribe-org/Scribe-Desktop/blob/main/LICENSE.txt) and should follow the coding indentation and style standards ([contact us](https://matrix.to/#/#scribe_community:matrix.org) if unsure).
 
@@ -251,16 +249,18 @@ When making a contribution, adhering to the [GitHub flow](https://guides.github.
 
 Thank you in advance for your contributions!
 
-# Data edits [`⇧`](#contents)
+<sub><a href="#top">Back to top.</a></sub>
+
+# Data edits
 
 > [!NOTE]\
 > Please see the [Wikidata and Scribe Guide](https://github.com/scribe-org/Organization/blob/main/WIKIDATAGUIDE.md) for an overview of [Wikidata](https://www.wikidata.org/) and how Scribe uses it.
 
 Scribe does not accept direct edits to the grammar JSON files as they are sourced from [Wikidata](https://www.wikidata.org/). Edits can be discussed and the [Scribe-Data](https://github.com/scribe-org/Scribe-Data) queries will be changed and ran before an update. If there is a problem with one of the files, then the fix should be made on [Wikidata](https://www.wikidata.org/) and not on Scribe. Feel free to let us know that edits have been made by [opening a data issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=data&template=data_wikidata.yml) or contacting us in the [issues for Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) and we'll be happy to integrate them!
 
-<a id="localization"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Localization [`⇧`](#contents)
+# Localization
 
 <a href="https://hosted.weblate.org/projects/scribe/scribe-i18n">
   <img src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/logos/WeblateLogo.png" width="125" alt="Visit Weblate project" align="right">
@@ -268,15 +268,15 @@ Scribe does not accept direct edits to the grammar JSON files as they are source
 
 Being an app that focusses on language learning, localization plays a big part in what Scribe will eventually be. Those interested are more than welcome to join the team at [scribe-org/Scribe-i18n](https://github.com/scribe-org/Scribe-i18n) where we work on localizing all Scribe applications via [Weblate](https://weblate.org/).
 
-<a id="documentation"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Documentation [`⇧`](#contents)
+# Documentation
 
 Documentation is an invaluable way to contribute to coding projects as it allows others to more easily understand the project structure and contribute. Issues related to documentation are marked with the [`documentation`](https://github.com/scribe-org/Scribe-Desktop/labels/documentation) label.
 
-<a id="design"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Design [`⇧`](#contents)
+# Design
 
 <a href="https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464">
   <img src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/logos/FigmaLogo.png" width="100" alt="Public Figma Designs" align="right">
@@ -285,3 +285,5 @@ Documentation is an invaluable way to contribute to coding projects as it allows
 Designs for Scribe are done in the [public design file in Figma](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464). Those interested in helping with Scribe's design are also welcome to share their ideas using the [design improvement](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=design&template=design_improvement.yml) template that makes an issue marked with the [`design`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3Adesign) label.
 
 All branding elements such as logos, icons, colors and fonts should follow those that are set out in [scribe-org/Organization](https://github.com/scribe-org/Organization). As the project is fully open source, these elements are also open for discussion. Efforts in making Scribe products professional with a distinct and cohesive identity are much appreciated!
+
+<sub><a href="#top">Back to top.</a></sub>
