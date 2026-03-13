@@ -16,14 +16,5 @@ fn main() {
 }
 
 fn start_process(command: &str, _name: &str) -> Option<Child> {
-    match Command::new(command).spawn() {
-        Ok(child) => {
-            // println!("Started {} successfully.", name);
-            Some(child)
-        }
-        Err(_e) => {
-            // eprintln!("Failed to start {}: {}", name, e);
-            None
-        }
-    }
+    Command::new(command).spawn().ok()
 }
