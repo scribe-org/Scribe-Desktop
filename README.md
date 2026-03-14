@@ -1,3 +1,5 @@
+<a id="top"></a>
+
 <div align="center">
   <a href="https://github.com/scribe-org/Scribe-Desktop"><img src="https://raw.githubusercontent.com/scribe-org/Organization/main/logo/ScribeGitHubOrgBanner.png" width=1024 alt="Scribe Logo"></a>
 </div>
@@ -30,9 +32,7 @@ Also available on [iOS](https://github.com/scribe-org/Scribe-iOS), [Android](htt
 
 Check out Scribe's [architecture diagrams](https://github.com/scribe-org/Organization/blob/main/ARCHITECTURE.md) for an overview of the organization including our applications, services and processes. It depicts the projects that [Scribe](https://github.com/scribe-org) is developing as well as the relationships between them and the external systems with which they interact.s
 
-<a id="contents"></a>
-
-# **Contents**
+## Contents
 
 <!-- - [Setup](#setup)
   - [Base Functionality](#base-functionality) -->
@@ -42,9 +42,7 @@ Check out Scribe's [architecture diagrams](https://github.com/scribe-org/Organiz
 - [Environment Setup](#environment-setup)
 - [Featured By](#featured-by)
 
-<a id="preview-images"></a>
-
-# Preview Images [`⇧`](#contents)
+# Preview Images
 
 The current WIP Scribe-Desktop UI is:
 
@@ -57,9 +55,9 @@ The current WIP Scribe-Desktop UI is:
   <br>
 </div>
 
-<a id="contributing"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Contributing [`⇧`](#contents)
+# Contributing
 
 <a href="https://matrix.to/#/#scribe_community:matrix.org">
   <img src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/logos/MatrixLogoGrey.png" width="175" alt="Public Matrix Chat" align="right">
@@ -74,7 +72,9 @@ Please see the [contribution guidelines](https://github.com/scribe-org/Scribe-De
 
 Those interested can further check the [`-next release-`](https://github.com/scribe-org/Scribe-Desktop/labels/-next%20release-) and [`-priority-`](https://github.com/scribe-org/Scribe-Desktop/labels/-priority-) labels in the [issues](https://github.com/scribe-org/Scribe-Desktop/issues) for those that are most important, as well as those marked [`good first issue`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) that are tailored for first-time contributors.
 
-### Ways to Help [`⇧`](#contents)
+<sub><a href="#top">Back to top.</a></sub>
+
+### Ways to Help
 
 - [Reporting bugs](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=bug&template=bug_report.yml) as they're found 🐞
 - Working on [new features](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Afeature) ✨
@@ -82,14 +82,14 @@ Those interested can further check the [`-next release-`](https://github.com/scr
 - [Documentation](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aissue+is%3Aopen+label%3Adocumentation) for onboarding and project cohesion 📝
 - Adding language data to [Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) via [Wikidata](https://www.wikidata.org/)! 🗃️
 
-### Road Map [`⇧`](#contents)
+### Road Map
 
 The Scribe road map can be followed in the organization's [project board](https://github.com/orgs/scribe-org/projects/1) where we list the most important issues along with their priority, status and an indication of which sub projects they're included in (if applicable).
 
 > [!NOTE]\
 > Consider joining our [bi-weekly developer syncs](https://etherpad.wikimedia.org/p/scribe-dev-sync)!
 
-### Designs [`⇧`](#contents)
+### Designs
 
 <a href="https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464">
   <img src="https://raw.githubusercontent.com/scribe-org/Organization/main/resources/images/logos/FigmaLogo.png" width="100" alt="Public Figma Designs" align="right">
@@ -97,16 +97,16 @@ The Scribe road map can be followed in the organization's [project board](https:
 
 The [designs for Scribe](https://www.figma.com/file/c8945w2iyoPYVhsqW7vRn6/scribe_public_designs?node-id=405%3A464) are made using [Figma](https://www.figma.com). Those with interest in contributing can [open a design issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=design&template=design_improvement.yml) to make suggestions! Design related issues are marked with the [`design`](https://github.com/scribe-org/Scribe-Desktop/issues?q=is%3Aopen+is%3Aissue+label%3Adesign) label.
 
-### Data Edits [`⇧`](#contents)
+### Data Edits
 
 > [!NOTE]\
 > Please see the [Wikidata and Scribe Guide](https://github.com/scribe-org/Organization/blob/main/WIKIDATAGUIDE.md) for an overview of [Wikidata](https://www.wikidata.org/) and how Scribe uses it.
 
 Scribe does not accept direct edits to the grammar JSON files as they are sourced from [Wikidata](https://www.wikidata.org/). Edits can be discussed and the queries themselves will be changed and ran before an update. If there is a problem with one of the files, then the fix should be made on [Wikidata](https://www.wikidata.org/) and not on Scribe. Feel free to let us know that edits have been made by [opening a data issue](https://github.com/scribe-org/Scribe-Desktop/issues/new?assignees=&labels=data&template=data_wikidata.yml) or contacting us in the [issues for Scribe-Data](https://github.com/scribe-org/Scribe-Data/issues) and we'll be happy to integrate them!
 
-<a id="environment-setup"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Environment Setup [`⇧`](#contents)
+# Environment Setup
 
 Those new to coding or wanting to develop their skills are more than welcome to contribute! The general steps to setting up a development environment are:
 
@@ -184,12 +184,13 @@ rustc --version
 cargo --version
 ```
 
-4. (Suggested) Install [pre-commit](https://pre-commit.com/) and its hooks to check for and correct common errors in commits:
+4. (Suggested) Install [prek](https://prek.j178.dev/) pre-commit hooks to check for and correct common errors in commits:
 
 ```bash
-pip install pre-commit
-pre-commit install
-# pre-commit run --all-files
+pip install --upgrade pip  # make sure that pip is at the latest version
+pip install prek
+prek install
+# prek --all-files
 ```
 
 5. Run the following to spin up a local copy of the Scribe-Desktop GUI:
@@ -206,9 +207,9 @@ cargo run
 > [!NOTE]
 > Feel free to contact the team in the [Desktop room on Matrix](https://matrix.to/#/#ScribeDesktop:matrix.org) if you're having problems getting your environment setup!
 
-<a id="featured-by"></a>
+<sub><a href="#top">Back to top.</a></sub>
 
-# Featured By [`⇧`](#contents)
+# Featured By
 
 Please see the [blog posts page on our website](https://scri.be/docs/about/blog-posts) for a list of articles on Scribe, and feel free to open a pull request to add one that you've written at [scribe-org/scri.be](https://github.com/scribe-org/scri.be)!
 
@@ -234,7 +235,9 @@ The following organizations have supported the development of Scribe projects th
   <br>
 </div>
 
-# Powered By [`⇧`](#contents)
+<sub><a href="#top">Back to top.</a></sub>
+
+# Powered By
 
 ### Contributors
 
@@ -262,3 +265,5 @@ The Scribe community would like to thank all the great software that made Scribe
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <br>
 </div>
+
+<sub><a href="#top">Back to top.</a></sub>
