@@ -45,7 +45,6 @@ impl Default for Scribe {
             show_menu: false,
             state: AppState {
                 is_dark_theme: is_dark,
-                ..AppState::default()
             },
             theme: detected_theme,
         }
@@ -129,17 +128,12 @@ impl Scribe {
                 loop {
                     match TcpListener::bind("127.0.0.1:7878") {
                         Ok(listener) => {
-                            for stream in listener.incoming() {
-                                if let Ok(mut stream) = stream {
-                                    let mut buffer = [0; 1];
-                                    if stream.read_exact(&mut buffer).is_ok() {
-                                        if let Some(received_char) =
-                                            char::from_u32(buffer[0].into())
-                                        {
-                                            let _ = output
-                                                .send(Message::KeyReceived(received_char))
-                                                .await;
-                                        }
+                            for mut stream in listener.incoming().flatten() {
+                                let mut buffer = [0; 1];
+                                if stream.read_exact(&mut buffer).is_ok() {
+                                    if let Some(received_char) = char::from_u32(buffer[0].into()) {
+                                        let _ =
+                                            output.send(Message::KeyReceived(received_char)).await;
                                     }
                                 }
                             }
