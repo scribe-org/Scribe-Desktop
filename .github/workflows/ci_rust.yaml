@@ -1,4 +1,4 @@
-name: Rust CI
+name: ci_rust
 
 on:
   pull_request:
@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install system dependencies
+      - name: Install System Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -25,16 +25,16 @@ jobs:
             libgl1-mesa-dev \
             libxtst-dev
 
-      - name: Install Rust toolchain
+      - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
 
-      - name: Check formatting
+      - name: Check Formatting
         working-directory: scribe
         run: cargo fmt --all -- --check
 
-      - name: Run clippy
+      - name: Run Clippy
         working-directory: scribe
         run: cargo clippy --all-targets --all-features -- -D warnings
 
@@ -42,6 +42,6 @@ jobs:
         working-directory: scribe
         run: cargo build --verbose
 
-      - name: Run tests
+      - name: Run Tests
         working-directory: scribe
         run: cargo test --verbose
