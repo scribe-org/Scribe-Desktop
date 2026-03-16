@@ -2,7 +2,19 @@ name: ci_rust
 
 on:
   pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - "scribe/**"
   push:
+    branches:
+      - main
+    paths:
+      - "scribe/**"
 
 jobs:
   ci:
