@@ -6,6 +6,7 @@ use iced::{window, Alignment, Element, Font, Length, Size, Subscription, Task, T
 use scribe::AppState;
 use std::io::Read;
 use std::net::TcpListener;
+use std::thread::spawn;
 
 #[derive(Debug, Clone)]
 pub enum Message {
@@ -52,20 +53,24 @@ impl Default for Scribe {
 }
 
 impl Scribe {
+    fn handle_key_received(&mut self, char: char) {
+        if self.is_executing_command {
+            if char == '\x08' {
+                self.keys.pop();
+            } else if char != '\t' {
+                self.keys.push(char);
+            }
+        }
+    }
+
     fn update(&mut self, message: Message) -> Task<Message> {
         match message {
             Message::KeyReceived(char) => {
-                if self.is_executing_command {
-                    if char == '\x08' {
-                        self.keys.pop();
-                    } else {
-                        self.keys.push(char);
-                    }
-                }
+                self.handle_key_received(char);
             }
             Message::ToggleMenu => {
                 self.show_menu = !self.show_menu;
-                self.is_executing_command = false;
+                self.is_executing_command = self.show_menu;
                 let new_height = if self.show_menu { 94.0 } else { 52.0 };
                 return window::get_latest()
                     .and_then(move |id| window::resize(id, Size::new(626.0, new_height)));
@@ -125,24 +130,21 @@ impl Scribe {
     fn subscription(&self) -> Subscription<Message> {
         Subscription::run(|| {
             stream::channel(100, |mut output| async move {
-                loop {
-                    match TcpListener::bind("127.0.0.1:7878") {
-                        Ok(listener) => {
-                            for mut stream in listener.incoming().flatten() {
-                                let mut buffer = [0; 1];
-                                if stream.read_exact(&mut buffer).is_ok() {
-                                    if let Some(received_char) = char::from_u32(buffer[0].into()) {
+                spawn(move || {
+                    if let Ok(listener) = TcpListener::bind("127.0.0.1:7878") {
+                        for mut stream in listener.incoming().flatten() {
+                            let mut buffer = [0; 1];
+                            if stream.read_exact(&mut buffer).is_ok() {
+                                if let Some(received_char) = char::from_u32(buffer[0].into()) {
+                                    iced::futures::executor::block_on(async {
                                         let _ =
                                             output.send(Message::KeyReceived(received_char)).await;
-                                    }
+                                    });
                                 }
                             }
                         }
-                        Err(_) => {
-                            tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
-                        }
                     }
-                }
+                });
             })
         })
     }
