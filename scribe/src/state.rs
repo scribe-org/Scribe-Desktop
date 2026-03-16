@@ -1,15 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct AppState {
     pub is_dark_theme: bool,
-}
-
-impl Default for AppState {
-    fn default() -> Self {
-        Self {
-            is_dark_theme: false,
-        }
-    }
 }
 
 impl AppState {
