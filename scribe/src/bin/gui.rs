@@ -433,3 +433,21 @@ fn main() -> iced::Result {
         })
         .run()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn characters_captured_when_listening() {
+        let mut s = Scribe {
+            is_executing_command: true,
+            ..Scribe::default()
+        };
+
+        s.handle_key_received('h');
+        s.handle_key_received('i');
+
+        assert_eq!(s.keys, "hi");
+    }
+}
