@@ -310,29 +310,40 @@ impl Scribe {
         let settings_row = Row::new()
             .spacing(10)
             .align_y(Alignment::Center)
-            .push(Container::new(if self.state.is_dark_theme { "Interface Theme: Dark" } else { "Interface Theme: Light" }).width(Length::Fixed(260.0)))
             .push(
-                Button::new(Container::new(if self.state.is_dark_theme { "Switch to Light" } else { "Switch to Dark" }))
-                    .on_press(Message::ToggleTheme)
-                    .style(move |_theme: &Theme, _status| {
-                        let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
+                Container::new(if self.state.is_dark_theme {
+                    "Interface Theme: Dark"
+                } else {
+                    "Interface Theme: Light"
+                })
+                .width(Length::Fixed(260.0)),
+            )
+            .push(
+                Button::new(Container::new(if self.state.is_dark_theme {
+                    "Switch to Light"
+                } else {
+                    "Switch to Dark"
+                }))
+                .on_press(Message::ToggleTheme)
+                .style(move |_theme: &Theme, _status| {
+                    let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
 
-                        button::Style {
-                            background: Some(iced::Background::Color(background_color)),
-                            text_color: if is_dark {
-                                iced::Color::WHITE
-                            } else {
-                                iced::Color::BLACK
-                            },
-                            border: iced::Border {
-                                color: iced::Color::TRANSPARENT,
-                                width: 0.0,
-                                radius: 4.0.into(),
-                            },
-                            shadow: iced::Shadow::default(),
-                        }
-                    })
-                    .width(button_width),
+                    button::Style {
+                        background: Some(iced::Background::Color(background_color)),
+                        text_color: if is_dark {
+                            iced::Color::WHITE
+                        } else {
+                            iced::Color::BLACK
+                        },
+                        border: iced::Border {
+                            color: iced::Color::TRANSPARENT,
+                            width: 0.0,
+                            radius: 4.0.into(),
+                        },
+                        shadow: iced::Shadow::default(),
+                    }
+                })
+                .width(button_width),
             );
 
         // Right column with input and buttons.
