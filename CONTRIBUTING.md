@@ -135,19 +135,13 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
 
 - For Linux and macOS:
 
-Run the following command in your terminal:
+Run the following command in your terminal to install `rustup` as described in the [Rust installation guide](https://doc.rust-lang.org/stable/book/ch01-01-installation.html):
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 Follow the on-screen instructions to complete the installation. You can find more details in the [official Rust documentation](https://doc.rust-lang.org/book/ch01-01-installation.html).
-
-Install `just` using the following command in your terminal:
-
-```bash
-cargo install just
-```
 
 - For Windows:
 
@@ -158,6 +152,12 @@ After installation, you may need to restart your terminal for the changes to tak
 ```bash
 rustc --version
 cargo --version
+```
+
+- Install `just` using the following command in your terminal:
+
+```bash
+cargo install just
 ```
 
 4. (Suggested) Install [prek](https://prek.j178.dev/) pre-commit hooks to check for and correct common errors in commits:
