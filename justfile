@@ -34,4 +34,3 @@ install-deps:
 
 install-rust-tools:
     rustup component add rustfmt clippy
-
