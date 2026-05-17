@@ -32,6 +32,7 @@ struct Scribe {
     keys: String,
     is_executing_command: bool,
     show_menu: bool,
+    show_settings: bool,
     state: AppState,
     theme: Theme,
 }
@@ -44,6 +45,7 @@ impl Default for Scribe {
             keys: String::new(),
             is_executing_command: false,
             show_menu: false,
+            show_settings: false,
             state: AppState {
                 is_dark_theme: is_dark,
             },
@@ -70,13 +72,23 @@ impl Scribe {
             }
             Message::ToggleMenu => {
                 self.show_menu = !self.show_menu;
+                // closing the menu should also close the settings pane
+                if !self.show_menu {
+                    self.show_settings = false;
+                }
                 self.is_executing_command = self.show_menu;
                 let new_height = if self.show_menu { 94.0 } else { 52.0 };
                 return window::get_latest()
                     .and_then(move |id| window::resize(id, Size::new(626.0, new_height)));
             }
             Message::Settings => {
-                println!("Settings clicked");
+                // Toggle the settings pane on/off and ensure the menu is visible
+                self.show_settings = !self.show_settings;
+                if self.show_settings {
+                    self.show_menu = true;
+                    self.is_executing_command = true;
+                }
+                println!("Settings clicked: show_settings={}", self.show_settings);
             }
             Message::Translate => {
                 self.is_executing_command = true;
@@ -294,6 +306,46 @@ impl Scribe {
                     .width(button_width),
             );
 
+        // If the settings pane is active, replace command buttons with settings UI
+        let settings_row = Row::new()
+            .spacing(10)
+            .align_y(Alignment::Center)
+            .push(
+                Container::new(if self.state.is_dark_theme {
+                    "Interface Theme: Dark"
+                } else {
+                    "Interface Theme: Light"
+                })
+                .width(Length::Fixed(260.0)),
+            )
+            .push(
+                Button::new(Container::new(if self.state.is_dark_theme {
+                    "Switch to Light"
+                } else {
+                    "Switch to Dark"
+                }))
+                .on_press(Message::ToggleTheme)
+                .style(move |_theme: &Theme, _status| {
+                    let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
+
+                    button::Style {
+                        background: Some(iced::Background::Color(background_color)),
+                        text_color: if is_dark {
+                            iced::Color::WHITE
+                        } else {
+                            iced::Color::BLACK
+                        },
+                        border: iced::Border {
+                            color: iced::Color::TRANSPARENT,
+                            width: 0.0,
+                            radius: 4.0.into(),
+                        },
+                        shadow: iced::Shadow::default(),
+                    }
+                })
+                .width(button_width),
+            );
+
         // Right column with input and buttons.
         let mut right_column = Column::new()
             .spacing(10)
@@ -302,7 +354,11 @@ impl Scribe {
 
         // Only show buttons when menu is open.
         if self.show_menu {
-            right_column = right_column.push(button_row);
+            if self.show_settings {
+                right_column = right_column.push(settings_row);
+            } else {
+                right_column = right_column.push(button_row);
+            }
         }
 
         // MARK: Main Layout
