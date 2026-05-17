@@ -145,7 +145,9 @@ Follow the on-screen instructions to complete the installation. You can find mor
 
 Install `just` using the following command in your terminal:
 
-`cargo install just`
+```bash
+cargo install just
+```
 
 - For Windows:
 
