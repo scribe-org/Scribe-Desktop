@@ -10,12 +10,13 @@ Following these guidelines helps to communicate that you respect the time of the
 
 If you have questions or would like to communicate with the team, please [join us in our public Matrix chat rooms](https://matrix.to/#/#scribe_community:matrix.org). We'd be happy to hear from you!
 
-# Contents
+## Contents
 
 - [First steps as a contributor](#first-steps-as-a-contributor)
 - [Mentorship and Growth](#mentorship-and-growth)
 - [Learning the tech stack](#learning-the-tech-stack)
 - [Development environment](#development-environment)
+- [Testing](#testing)
 - [Issues and projects](#issues-and-projects)
 - [Bug reports](#bug-reports)
 - [Feature requests](#feature-requests)
@@ -130,11 +131,11 @@ git remote add upstream https://github.com/scribe-org/Scribe-Desktop.git
   - `origin` (forked repository)
   - `upstream` (Scribe-Desktop repository)
 
-3. Install Rust and Cargo:
+3. Install Rust, Cargo and just:
 
 - For Linux and macOS:
 
-Run the following command in your terminal:
+Run the following command in your terminal to install `rustup` as described in the [Rust installation guide](https://doc.rust-lang.org/stable/book/ch01-01-installation.html):
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -151,6 +152,12 @@ After installation, you may need to restart your terminal for the changes to tak
 ```bash
 rustc --version
 cargo --version
+```
+
+- Install `just` using the following command in your terminal:
+
+```bash
+cargo install just
 ```
 
 4. (Suggested) Install [prek](https://prek.j178.dev/) pre-commit hooks to check for and correct common errors in commits:
@@ -175,6 +182,16 @@ cargo run
 
 > [!NOTE]
 > Feel free to contact the team in the [Desktop room on Matrix](https://matrix.to/#/#ScribeDesktop:matrix.org) if you're having problems getting your environment setup!
+
+<sub><a href="#top">Back to top.</a></sub>
+
+# Testing
+
+In addition to the prek pre-commit hooks that are set up during the development environment section, Scribe-Desktop also includes a testing suite that should be ran before all pull requests and subsequent commits. Please run the following in the project root:
+
+```bash
+just
+```
 
 <sub><a href="#top">Back to top.</a></sub>
 
