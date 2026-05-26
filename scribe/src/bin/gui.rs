@@ -8,6 +8,8 @@ use std::io::Read;
 use std::net::TcpListener;
 use std::thread::spawn;
 
+const WINDOW_WIDTH: f32 = 495.0;
+
 #[derive(Debug, Clone)]
 pub enum Message {
     KeyReceived(char),
@@ -79,7 +81,7 @@ impl Scribe {
                 self.is_executing_command = self.show_menu;
                 let new_height = if self.show_menu { 94.0 } else { 52.0 };
                 return window::get_latest()
-                    .and_then(move |id| window::resize(id, Size::new(626.0, new_height)));
+                    .and_then(move |id| window::resize(id, Size::new(WINDOW_WIDTH, new_height)));
             }
             Message::Settings => {
                 // Toggle the settings pane on/off and ensure the menu is visible
@@ -281,30 +283,7 @@ impl Scribe {
                 Message::Conjugate,
                 button_width,
             ))
-            .push(self.create_command_button(plural_icon, "Plural", Message::Plural, button_width))
-            .push(
-                Button::new(Container::new("Theme"))
-                    .on_press(Message::ToggleTheme)
-                    .style(move |_theme: &Theme, _status| {
-                        let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
-
-                        button::Style {
-                            background: Some(iced::Background::Color(background_color)),
-                            text_color: if is_dark {
-                                iced::Color::WHITE
-                            } else {
-                                iced::Color::BLACK
-                            },
-                            border: iced::Border {
-                                color: iced::Color::TRANSPARENT,
-                                width: 0.0,
-                                radius: 4.0.into(),
-                            },
-                            shadow: iced::Shadow::default(),
-                        }
-                    })
-                    .width(button_width),
-            );
+            .push(self.create_command_button(plural_icon, "Plural", Message::Plural, button_width));
 
         // If the settings pane is active, replace command buttons with settings UI
         let settings_row = Row::new()
@@ -480,8 +459,8 @@ fn main() -> iced::Result {
         .subscription(Scribe::subscription)
         .theme(Scribe::theme)
         .window(window::Settings {
-            min_size: Some(Size::new(626.0, 52.0)),
-            size: Size::new(626.0, 52.0),
+            min_size: Some(Size::new(WINDOW_WIDTH, 52.0)),
+            size: Size::new(WINDOW_WIDTH, 52.0),
             position: window::Position::Centered,
             resizable: false,
             decorations: true,
