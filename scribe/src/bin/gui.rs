@@ -7,8 +7,32 @@ use scribe::AppState;
 use std::io::Read;
 use std::net::TcpListener;
 use std::thread::spawn;
-
 const WINDOW_WIDTH: f32 = 495.0;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum CommandKind {
+    Translate,
+    Conjugate,
+    Plural,
+}
+
+impl CommandKind {
+    fn label(self) -> &'static str {
+        match self {
+            Self::Translate => "Translate",
+            Self::Conjugate => "Conjugate",
+            Self::Plural => "Plural",
+        }
+    }
+
+    fn placeholder(self) -> &'static str {
+        match self {
+            Self::Translate => "Enter text to translate...",
+            Self::Conjugate => "Enter verb to conjugate...",
+            Self::Plural => "Enter noun to pluralize...",
+        }
+    }
+}
 
 #[derive(Debug, Clone)]
 pub enum Message {
@@ -19,6 +43,7 @@ pub enum Message {
     Translate,
     Conjugate,
     Plural,
+    ExecuteCommand,
     ToggleTheme,
     NoOp,
 }
@@ -33,6 +58,7 @@ fn detect_system_theme() -> Theme {
 struct Scribe {
     keys: String,
     is_executing_command: bool,
+    selected_command: Option<CommandKind>,
     show_menu: bool,
     show_settings: bool,
     state: AppState,
@@ -46,6 +72,7 @@ impl Default for Scribe {
         Scribe {
             keys: String::new(),
             is_executing_command: false,
+            selected_command: None,
             show_menu: false,
             show_settings: false,
             state: AppState {
@@ -58,7 +85,7 @@ impl Default for Scribe {
 
 impl Scribe {
     fn handle_key_received(&mut self, char: char) {
-        if self.is_executing_command {
+        if self.is_executing_command && self.selected_command.is_some() {
             if char == '\x08' {
                 self.keys.pop();
             } else if char != '\t' {
@@ -79,6 +106,9 @@ impl Scribe {
                     self.show_settings = false;
                 }
                 self.is_executing_command = self.show_menu;
+                if !self.show_menu {
+                    self.selected_command = None;
+                }
                 let new_height = if self.show_menu { 94.0 } else { 52.0 };
                 return window::get_latest()
                     .and_then(move |id| window::resize(id, Size::new(WINDOW_WIDTH, new_height)));
@@ -89,20 +119,24 @@ impl Scribe {
                 if self.show_settings {
                     self.show_menu = true;
                     self.is_executing_command = true;
+                    self.selected_command = None;
                 }
                 println!("Settings clicked: show_settings={}", self.show_settings);
             }
             Message::Translate => {
-                self.is_executing_command = true;
+                self.select_command(CommandKind::Translate);
                 println!("Translate");
             }
             Message::Conjugate => {
-                self.is_executing_command = true;
+                self.select_command(CommandKind::Conjugate);
                 println!("Conjugate");
             }
             Message::Plural => {
-                self.is_executing_command = true;
+                self.select_command(CommandKind::Plural);
                 println!("Plural");
+            }
+            Message::ExecuteCommand => {
+                self.execute_selected_command();
             }
             Message::TextInputChanged(new_text) => {
                 self.keys = new_text;
@@ -139,6 +173,18 @@ impl Scribe {
             Message::NoOp => {}
         }
         Task::none()
+    }
+
+    fn select_command(&mut self, command: CommandKind) {
+        self.selected_command = Some(command);
+        self.is_executing_command = true;
+        self.show_settings = false;
+    }
+
+    fn execute_selected_command(&self) {
+        if let Some(command) = self.selected_command {
+            println!("Execute {}: {}", command.label(), self.keys);
+        }
     }
 
     fn subscription(&self) -> Subscription<Message> {
@@ -208,7 +254,12 @@ impl Scribe {
         let conjugate_icon = create_icon(conjugate_icon_data, BUTTON_ICON_SIZE);
         let plural_icon = create_icon(plural_icon_data, BUTTON_ICON_SIZE);
 
-        let text_input = text_input("Enter text for command...", &self.keys)
+        let input_placeholder = self
+            .selected_command
+            .map(CommandKind::placeholder)
+            .unwrap_or("Enter text for command...");
+
+        let text_input = text_input(input_placeholder, &self.keys)
             .font(Font::DEFAULT)
             .on_input(Message::TextInputChanged)
             .style(move |_theme: &Theme, _status| {
@@ -276,14 +327,45 @@ impl Scribe {
                 "Translate",
                 Message::Translate,
                 button_width,
+                self.selected_command == Some(CommandKind::Translate),
             ))
             .push(self.create_command_button(
                 conjugate_icon,
                 "Conjugate",
                 Message::Conjugate,
                 button_width,
+                self.selected_command == Some(CommandKind::Conjugate),
             ))
-            .push(self.create_command_button(plural_icon, "Plural", Message::Plural, button_width));
+            .push(self.create_command_button(
+                plural_icon,
+                "Plural",
+                Message::Plural,
+                button_width,
+                self.selected_command == Some(CommandKind::Plural),
+            ))
+            .push(
+                Button::new(Container::new("Theme"))
+                    .on_press(Message::ToggleTheme)
+                    .style(move |_theme: &Theme, _status| {
+                        let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
+
+                        button::Style {
+                            background: Some(iced::Background::Color(background_color)),
+                            text_color: if is_dark {
+                                iced::Color::WHITE
+                            } else {
+                                iced::Color::BLACK
+                            },
+                            border: iced::Border {
+                                color: iced::Color::TRANSPARENT,
+                                width: 0.0,
+                                radius: 4.0.into(),
+                            },
+                            shadow: iced::Shadow::default(),
+                        }
+                    })
+                    .width(button_width),
+            );
 
         // If the settings pane is active, replace command buttons with settings UI
         let settings_row = Row::new()
@@ -326,10 +408,19 @@ impl Scribe {
             );
 
         // Right column with input and buttons.
+        let input_row = Row::new()
+            .spacing(10)
+            .align_y(Alignment::Center)
+            .push(text_input)
+            .push_maybe(
+                self.selected_command
+                    .map(|_| self.create_enter_button(Length::Fixed(70.0))),
+            );
+
         let mut right_column = Column::new()
             .spacing(10)
             .width(Length::Fill)
-            .push(text_input);
+            .push(input_row);
 
         // Only show buttons when menu is open.
         if self.show_menu {
@@ -426,6 +517,7 @@ impl Scribe {
         label: &'a str,
         message: Message,
         width: Length,
+        is_selected: bool,
     ) -> Button<'a, Message> {
         let is_dark = self.state.is_dark_theme;
         let content = Row::new().spacing(5).push(icon).push(label);
@@ -433,7 +525,15 @@ impl Scribe {
         Button::new(Container::new(content))
             .on_press(message)
             .style(move |_theme: &Theme, _status| {
-                let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
+                let background_color = if is_selected {
+                    if is_dark {
+                        iced::Color::from_rgb8(0x12, 0x66, 0x4F)
+                    } else {
+                        iced::Color::from_rgb8(0x8A, 0xD6, 0xAA)
+                    }
+                } else {
+                    iced::Color::from_rgb8(0x4C, 0xAD, 0xE6)
+                };
 
                 button::Style {
                     background: Some(iced::Background::Color(background_color)),
@@ -449,6 +549,30 @@ impl Scribe {
                     },
                     shadow: iced::Shadow::default(),
                 }
+            })
+            .width(width)
+    }
+
+    fn create_enter_button<'a>(&self, width: Length) -> Button<'a, Message> {
+        let is_dark = self.state.is_dark_theme;
+
+        Button::new(Container::new("Enter").center_x(Length::Fill))
+            .on_press(Message::ExecuteCommand)
+            .style(move |_theme: &Theme, _status| button::Style {
+                background: Some(iced::Background::Color(iced::Color::from_rgb8(
+                    0x12, 0x66, 0x4F,
+                ))),
+                text_color: if is_dark {
+                    iced::Color::WHITE
+                } else {
+                    iced::Color::BLACK
+                },
+                border: iced::Border {
+                    color: iced::Color::TRANSPARENT,
+                    width: 0.0,
+                    radius: 4.0.into(),
+                },
+                shadow: iced::Shadow::default(),
             })
             .width(width)
     }
@@ -477,6 +601,7 @@ mod tests {
     fn characters_captured_when_listening() {
         let mut s = Scribe {
             is_executing_command: true,
+            selected_command: Some(CommandKind::Translate),
             ..Scribe::default()
         };
 
@@ -484,5 +609,29 @@ mod tests {
         s.handle_key_received('i');
 
         assert_eq!(s.keys, "hi");
+    }
+
+    #[test]
+    fn characters_ignored_without_selected_command() {
+        let mut s = Scribe {
+            is_executing_command: true,
+            selected_command: None,
+            ..Scribe::default()
+        };
+
+        s.handle_key_received('h');
+
+        assert_eq!(s.keys, "");
+    }
+
+    #[test]
+    fn command_selection_tracks_active_command() {
+        let mut s = Scribe::default();
+
+        s.select_command(CommandKind::Plural);
+
+        assert_eq!(s.selected_command, Some(CommandKind::Plural));
+        assert!(s.is_executing_command);
+        assert!(!s.show_settings);
     }
 }
