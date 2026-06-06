@@ -27,9 +27,9 @@ impl CommandKind {
 
     fn placeholder(self) -> &'static str {
         match self {
-            Self::Translate => "Enter text to translate...",
+            Self::Translate => "Enter word to translate...",
             Self::Conjugate => "Enter verb to conjugate...",
-            Self::Plural => "Enter noun to pluralize...",
+            Self::Plural => "Enter noun to return the plural for...",
         }
     }
 }
