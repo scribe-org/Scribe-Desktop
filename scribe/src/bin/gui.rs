@@ -39,9 +39,9 @@ impl CommandKind {
 
     fn placeholder(self) -> &'static str {
         match self {
-            Self::Translate => "Enter word to translate...",
-            Self::Conjugate => "Enter verb to conjugate...",
-            Self::Plural => "Enter noun to return the plural for...",
+            Self::Translate => "Enter word to translate",
+            Self::Conjugate => "Enter verb to conjugate",
+            Self::Plural => "Enter noun to return the plural for",
         }
     }
 }
@@ -368,7 +368,7 @@ impl Scribe {
                 } else {
                     "Interface Theme: Light"
                 })
-                .width(Length::Fixed(260.0)),
+                .width(Length::Fill),
             )
             .push(
                 Button::new(Container::new(if self.state.is_dark_theme {
