@@ -9,6 +9,18 @@ use std::net::TcpListener;
 use std::thread::spawn;
 const WINDOW_WIDTH: f32 = 495.0;
 
+fn scribe_blue() -> iced::Color {
+    iced::Color::from_rgb8(0x4C, 0xAD, 0xE6)
+}
+
+fn active_command_color(is_dark: bool) -> iced::Color {
+    if is_dark {
+        iced::Color::from_rgb8(0x6E, 0xC7, 0xF2)
+    } else {
+        iced::Color::from_rgb8(0x2F, 0x8F, 0xC8)
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 enum CommandKind {
     Translate,
@@ -27,9 +39,9 @@ impl CommandKind {
 
     fn placeholder(self) -> &'static str {
         match self {
-            Self::Translate => "Enter word to translate...",
-            Self::Conjugate => "Enter verb to conjugate...",
-            Self::Plural => "Enter noun to return the plural for...",
+            Self::Translate => "Enter word to translate",
+            Self::Conjugate => "Enter verb to conjugate",
+            Self::Plural => "Enter noun to return the plural for",
         }
     }
 }
@@ -318,54 +330,33 @@ impl Scribe {
 
         // MARK: Command Buttons
 
-        let button_width = Length::Fixed(130.0);
+        let command_button_width = Length::FillPortion(1);
+        let settings_button_width = Length::Fixed(130.0);
         let button_row = Row::new()
             .spacing(10)
             .align_y(Alignment::Start)
+            .width(Length::Fill)
             .push(self.create_command_button(
                 translate_icon,
                 "Translate",
                 Message::Translate,
-                button_width,
+                command_button_width,
                 self.selected_command == Some(CommandKind::Translate),
             ))
             .push(self.create_command_button(
                 conjugate_icon,
                 "Conjugate",
                 Message::Conjugate,
-                button_width,
+                command_button_width,
                 self.selected_command == Some(CommandKind::Conjugate),
             ))
             .push(self.create_command_button(
                 plural_icon,
                 "Plural",
                 Message::Plural,
-                button_width,
+                command_button_width,
                 self.selected_command == Some(CommandKind::Plural),
-            ))
-            .push(
-                Button::new(Container::new("Theme"))
-                    .on_press(Message::ToggleTheme)
-                    .style(move |_theme: &Theme, _status| {
-                        let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
-
-                        button::Style {
-                            background: Some(iced::Background::Color(background_color)),
-                            text_color: if is_dark {
-                                iced::Color::WHITE
-                            } else {
-                                iced::Color::BLACK
-                            },
-                            border: iced::Border {
-                                color: iced::Color::TRANSPARENT,
-                                width: 0.0,
-                                radius: 4.0.into(),
-                            },
-                            shadow: iced::Shadow::default(),
-                        }
-                    })
-                    .width(button_width),
-            );
+            ));
 
         // If the settings pane is active, replace command buttons with settings UI
         let settings_row = Row::new()
@@ -377,7 +368,7 @@ impl Scribe {
                 } else {
                     "Interface Theme: Light"
                 })
-                .width(Length::Fixed(260.0)),
+                .width(Length::Fill),
             )
             .push(
                 Button::new(Container::new(if self.state.is_dark_theme {
@@ -386,25 +377,21 @@ impl Scribe {
                     "Switch to Dark"
                 }))
                 .on_press(Message::ToggleTheme)
-                .style(move |_theme: &Theme, _status| {
-                    let background_color = iced::Color::from_rgb8(0x4C, 0xAD, 0xE6);
-
-                    button::Style {
-                        background: Some(iced::Background::Color(background_color)),
-                        text_color: if is_dark {
-                            iced::Color::WHITE
-                        } else {
-                            iced::Color::BLACK
-                        },
-                        border: iced::Border {
-                            color: iced::Color::TRANSPARENT,
-                            width: 0.0,
-                            radius: 4.0.into(),
-                        },
-                        shadow: iced::Shadow::default(),
-                    }
+                .style(move |_theme: &Theme, _status| button::Style {
+                    background: Some(iced::Background::Color(scribe_blue())),
+                    text_color: if is_dark {
+                        iced::Color::WHITE
+                    } else {
+                        iced::Color::BLACK
+                    },
+                    border: iced::Border {
+                        color: iced::Color::TRANSPARENT,
+                        width: 0.0,
+                        radius: 4.0.into(),
+                    },
+                    shadow: iced::Shadow::default(),
                 })
-                .width(button_width),
+                .width(settings_button_width),
             );
 
         // Right column with input and buttons.
@@ -485,7 +472,7 @@ impl Scribe {
                         iced::Color::from_rgb8(0xFD, 0xAD, 0x0D)
                     }
                 } else {
-                    iced::Color::from_rgb8(0x4C, 0xAD, 0xE6)
+                    scribe_blue()
                 };
 
                 button::Style {
@@ -526,13 +513,9 @@ impl Scribe {
             .on_press(message)
             .style(move |_theme: &Theme, _status| {
                 let background_color = if is_selected {
-                    if is_dark {
-                        iced::Color::from_rgb8(0x12, 0x66, 0x4F)
-                    } else {
-                        iced::Color::from_rgb8(0x8A, 0xD6, 0xAA)
-                    }
+                    active_command_color(is_dark)
                 } else {
-                    iced::Color::from_rgb8(0x4C, 0xAD, 0xE6)
+                    scribe_blue()
                 };
 
                 button::Style {
@@ -556,12 +539,10 @@ impl Scribe {
     fn create_enter_button<'a>(&self, width: Length) -> Button<'a, Message> {
         let is_dark = self.state.is_dark_theme;
 
-        Button::new(Container::new("Enter").center_x(Length::Fill))
+        Button::new(Container::new("▶").center_x(Length::Fill))
             .on_press(Message::ExecuteCommand)
             .style(move |_theme: &Theme, _status| button::Style {
-                background: Some(iced::Background::Color(iced::Color::from_rgb8(
-                    0x12, 0x66, 0x4F,
-                ))),
+                background: Some(iced::Background::Color(active_command_color(is_dark))),
                 text_color: if is_dark {
                     iced::Color::WHITE
                 } else {
