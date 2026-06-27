@@ -214,9 +214,8 @@ impl Scribe {
                                         if let Ok(s) = std::str::from_utf8(&char_buf[..len]) {
                                             if let Some(c) = s.chars().next() {
                                                 iced::futures::executor::block_on(async {
-                                                    let _ = output
-                                                        .send(Message::KeyReceived(c))
-                                                        .await;
+                                                    let _ =
+                                                        output.send(Message::KeyReceived(c)).await;
                                                 });
                                             }
                                         }
