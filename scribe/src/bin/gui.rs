@@ -205,13 +205,22 @@ impl Scribe {
                 spawn(move || {
                     if let Ok(listener) = TcpListener::bind("127.0.0.1:7878") {
                         for mut stream in listener.incoming().flatten() {
-                            let mut buffer = [0; 1];
-                            if stream.read_exact(&mut buffer).is_ok() {
-                                if let Some(received_char) = char::from_u32(buffer[0].into()) {
-                                    iced::futures::executor::block_on(async {
-                                        let _ =
-                                            output.send(Message::KeyReceived(received_char)).await;
-                                    });
+                            let mut len_buf = [0u8; 1];
+                            if stream.read_exact(&mut len_buf).is_ok() {
+                                let len = len_buf[0] as usize;
+                                if len > 0 && len <= 4 {
+                                    let mut char_buf = [0u8; 4];
+                                    if stream.read_exact(&mut char_buf[..len]).is_ok() {
+                                        if let Ok(s) = std::str::from_utf8(&char_buf[..len]) {
+                                            if let Some(c) = s.chars().next() {
+                                                iced::futures::executor::block_on(async {
+                                                    let _ = output
+                                                        .send(Message::KeyReceived(c))
+                                                        .await;
+                                                });
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -590,6 +599,21 @@ mod tests {
         s.handle_key_received('i');
 
         assert_eq!(s.keys, "hi");
+    }
+
+    #[test]
+    fn unicode_characters_captured() {
+        let mut s = Scribe {
+            is_executing_command: true,
+            selected_command: Some(CommandKind::Translate),
+            ..Scribe::default()
+        };
+
+        s.handle_key_received('å');
+        s.handle_key_received('ä');
+        s.handle_key_received('ö');
+
+        assert_eq!(s.keys, "åäö");
     }
 
     #[test]
