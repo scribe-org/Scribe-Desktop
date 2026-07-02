@@ -1,9 +1,11 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 use iced::futures::SinkExt;
 use iced::stream;
-use iced::widget::{button, image::Handle, text_input, Button, Column, Container, Image, Row};
+use iced::widget::{
+    button, image::Handle, pick_list, text_input, Button, Column, Container, Image, Row,
+};
 use iced::{window, Alignment, Element, Font, Length, Size, Subscription, Task, Theme};
-use scribe::AppState;
+use scribe::{state::Language, AppState};
 use std::io::Read;
 use std::net::TcpListener;
 use std::thread::spawn;
@@ -57,6 +59,8 @@ pub enum Message {
     Plural,
     ExecuteCommand,
     ToggleTheme,
+    FromLanguageSelected(Language),
+    ToLanguageSelected(Language),
     NoOp,
 }
 
@@ -89,6 +93,8 @@ impl Default for Scribe {
             show_settings: false,
             state: AppState {
                 is_dark_theme: is_dark,
+                from_language: Language::default(),
+                to_language: Language::default(),
             },
             theme: detected_theme,
         }
@@ -113,27 +119,25 @@ impl Scribe {
             }
             Message::ToggleMenu => {
                 self.show_menu = !self.show_menu;
-                // closing the menu should also close the settings pane
                 if !self.show_menu {
                     self.show_settings = false;
-                }
-                self.is_executing_command = self.show_menu;
-                if !self.show_menu {
                     self.selected_command = None;
                 }
+                self.is_executing_command = self.show_menu;
                 let new_height = if self.show_menu { 94.0 } else { 52.0 };
                 return window::get_latest()
                     .and_then(move |id| window::resize(id, Size::new(WINDOW_WIDTH, new_height)));
             }
             Message::Settings => {
-                // Toggle the settings pane on/off and ensure the menu is visible
                 self.show_settings = !self.show_settings;
                 if self.show_settings {
                     self.show_menu = true;
                     self.is_executing_command = true;
                     self.selected_command = None;
                 }
-                println!("Settings clicked: show_settings={}", self.show_settings);
+                let new_height = if self.show_settings { 160.0 } else { 94.0 };
+                return window::get_latest()
+                    .and_then(move |id| window::resize(id, Size::new(WINDOW_WIDTH, new_height)));
             }
             Message::Translate => {
                 self.select_command(CommandKind::Translate);
@@ -152,6 +156,12 @@ impl Scribe {
             }
             Message::TextInputChanged(new_text) => {
                 self.keys = new_text;
+            }
+            Message::FromLanguageSelected(lang) => {
+                self.state.from_language = lang;
+            }
+            Message::ToLanguageSelected(lang) => {
+                self.state.to_language = lang;
             }
             Message::ToggleTheme => {
                 self.state.toggle_theme();
@@ -367,7 +377,33 @@ impl Scribe {
             ));
 
         // If the settings pane is active, replace command buttons with settings UI
-        let settings_row = Row::new()
+        let from_row = Row::new()
+            .spacing(10)
+            .align_y(Alignment::Center)
+            .push(Container::new("Translate from:").width(Length::Fill))
+            .push(
+                pick_list(
+                    &Language::ALL[..],
+                    Some(self.state.from_language),
+                    Message::FromLanguageSelected,
+                )
+                .width(settings_button_width),
+            );
+
+        let to_row = Row::new()
+            .spacing(10)
+            .align_y(Alignment::Center)
+            .push(Container::new("Translate to:").width(Length::Fill))
+            .push(
+                pick_list(
+                    &Language::ALL[..],
+                    Some(self.state.to_language),
+                    Message::ToLanguageSelected,
+                )
+                .width(settings_button_width),
+            );
+
+        let theme_row = Row::new()
             .spacing(10)
             .align_y(Alignment::Center)
             .push(
@@ -402,6 +438,12 @@ impl Scribe {
                 .width(settings_button_width),
             );
 
+        let settings_column = Column::new()
+            .spacing(10)
+            .push(from_row)
+            .push(to_row)
+            .push(theme_row);
+
         // Right column with input and buttons.
         let input_row = Row::new()
             .spacing(10)
@@ -420,7 +462,7 @@ impl Scribe {
         // Only show buttons when menu is open.
         if self.show_menu {
             if self.show_settings {
-                right_column = right_column.push(settings_row);
+                right_column = right_column.push(settings_column);
             } else {
                 right_column = right_column.push(button_row);
             }
