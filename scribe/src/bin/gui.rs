@@ -135,7 +135,7 @@ impl Scribe {
                     self.is_executing_command = true;
                     self.selected_command = None;
                 }
-                let new_height = if self.show_settings { 160.0 } else { 94.0 };
+                let new_height = if self.show_settings { 170.0 } else { 94.0 };
                 return window::get_latest()
                     .and_then(move |id| window::resize(id, Size::new(WINDOW_WIDTH, new_height)));
             }
