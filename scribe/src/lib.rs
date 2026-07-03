@@ -2,3 +2,4 @@
 pub mod state;
 pub mod styles;
 pub use state::AppState;
+pub use state::Language;
