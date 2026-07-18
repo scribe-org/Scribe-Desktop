@@ -58,7 +58,7 @@ pub enum Message {
     Conjugate,
     Plural,
     ExecuteCommand,
-    
+
     ClearInput,
     ToggleTheme,
     FromLanguageSelected(Language),
