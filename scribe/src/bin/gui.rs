@@ -58,6 +58,8 @@ pub enum Message {
     Conjugate,
     Plural,
     ExecuteCommand,
+
+    ClearInput,
     ToggleTheme,
     FromLanguageSelected(Language),
     ToLanguageSelected(Language),
@@ -153,6 +155,9 @@ impl Scribe {
             }
             Message::ExecuteCommand => {
                 self.execute_selected_command();
+            }
+            Message::ClearInput => {
+                self.keys.clear();
             }
             Message::TextInputChanged(new_text) => {
                 self.keys = new_text;
@@ -449,6 +454,7 @@ impl Scribe {
             .spacing(10)
             .align_y(Alignment::Center)
             .push(text_input)
+            .push_maybe((!self.keys.is_empty()).then(|| self.create_clear_button()))
             .push_maybe(
                 self.selected_command
                     .map(|_| self.create_enter_button(Length::Fixed(70.0))),
@@ -607,6 +613,32 @@ impl Scribe {
             })
             .width(width)
     }
+
+    fn create_clear_button<'a>(&self) -> Button<'a, Message> {
+        let is_dark = self.state.is_dark_theme;
+
+        Button::new(Container::new("X").center_x(Length::Fill))
+            .on_press(Message::ClearInput)
+            .style(move |_theme: &Theme, _status| button::Style {
+                background: Some(iced::Background::Color(if is_dark {
+                    iced::Color::from_rgb8(0x4A, 0x4A, 0x4A)
+                } else {
+                    iced::Color::from_rgb8(0xE2, 0xE6, 0xEC)
+                })),
+                text_color: if is_dark {
+                    iced::Color::WHITE
+                } else {
+                    iced::Color::BLACK
+                },
+                border: iced::Border {
+                    color: iced::Color::TRANSPARENT,
+                    width: 0.0,
+                    radius: 4.0.into(),
+                },
+                shadow: iced::Shadow::default(),
+            })
+            .width(Length::Fixed(36.0))
+    }
 }
 
 fn main() -> iced::Result {
@@ -679,5 +711,17 @@ mod tests {
         assert_eq!(s.selected_command, Some(CommandKind::Plural));
         assert!(s.is_executing_command);
         assert!(!s.show_settings);
+    }
+
+    #[test]
+    fn clear_input_empties_keys() {
+        let mut s = Scribe {
+            keys: "a lot of text".to_string(),
+            ..Scribe::default()
+        };
+
+        let _ = s.update(Message::ClearInput);
+
+        assert_eq!(s.keys, "");
     }
 }
